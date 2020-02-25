@@ -12,9 +12,10 @@ body, input, button {
 	color: #fff;
 }
 
-.navbar-link:not(.is-arrowless)::after {
+.hero-head .navbar-link:not(.is-arrowless)::after {
 	border-color: #fff;
 }
+
 @media (min-width: 1024px) {
 	.navbar-dropdown {
 		background-color: inherit;
