@@ -24,6 +24,18 @@ body, input, button {
 	}
 }
 
+@media (max-width: 1024px) {
+	a.navbar-link.is-arrowless {
+		height: 0;
+		padding: 0;
+		transform: scale(0);
+	}
+}
+
+#username {
+	padding-right: 0.5em;
+}
+
 #nav-icon {
 	margin-right: 0.5em;
 }

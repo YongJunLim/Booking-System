@@ -2,7 +2,7 @@
 <html>
     <head>
         {% block head %}
-			<title>DHS Booking System</title>
+			<title>*TEMP* Booking System</title>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<link rel="stylesheet" href=
@@ -56,14 +56,31 @@
 								</div>
 							</div>
 						</div>
-            		    <div class="navbar-end">
+						<div class="navbar-end">
 							<a href="" class="navbar-item">
 								Help
 							</a>
-							<a href="" class="navbar-item">
-								Sign in
-							</a>
-                        </div>
+							{% if not email %}
+								<a href="" class="navbar-item">
+									Sign in
+								</a>
+							{% else %}
+								<div class="navbar-item" id="username">LONG USERNAME</div>
+								<div class="navbar-item has-dropdown is-hoverable">
+									<a class="navbar-link is-arrowless">
+										<figure class="image is-24x24">
+											<img id="user-icon" class="is-rounded" src="
+											{{ url_for('static', filename='img/user_icon.png') }}">
+										</figure>
+									</a>
+									<div class="navbar-dropdown is-right">
+										<a href="" class="navbar-item">
+											Sign out
+										</a>
+									</div>
+								</div>
+							{% endif %}
+						</div>
                     </div>
             	</nav>
         	{% endblock %}
