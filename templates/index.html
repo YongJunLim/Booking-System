@@ -4,4 +4,112 @@
     {% block nav %}
         {{ super() }}
     {% endblock %}
+    {% block content %}
+    <section class="section is-centered">
+        <div class="container">
+            <h1 class="title">Upcoming Consultations</h1>
+            <table class="table is-fullwidth is-hoverable">
+                <thead>
+                    <tr>
+                    <th>Teacher/Student</th>
+                    <th>Time Booked</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="test-modal" data-target="modal_consult_1" aria-haspopup="true">
+                        <td>Teacher A</td>
+                        <td>
+                            28 February 2020<br>
+                            1:00pm
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Teacher B</td>
+                        <td>
+                            28 February 2020<br>
+                            1:20pm
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Teacher A</td>
+                        <td>
+                            2 March 2020<br>
+                            10:20am
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h1 class="title">Upcoming Special Events</h1>
+            <h2 class="subtitle">2020 Y5 PTM</h2>
+            <table class="table is-fullwidth is-hoverable">
+                <thead>
+                    <tr>
+                    <th>Teacher/Student</th>
+                    <th>Time Booked</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Teacher C</td>
+                        <td>
+                            3 March 2020<br>
+                            5:00pm
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Teacher B</td>
+                        <td>
+                            3 March 2020<br>
+                            5:20pm
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="modal_consult_1" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <table class="table is-fullwidth is-hoverable">
+                        <tbody>
+                            <tr>
+                                <td class="has-text-weight-bold">Teacher/Student</td>
+                                <td>
+                                    Teacher A
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Email</td>
+                                <td>
+                                    TeacherA@dhs.sg
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Time Booked</td>
+                                <td>
+                                    28 February 2020<br>
+                                    1:00pm
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Type</td>
+                                <td>
+                                    Hmm
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Reference Code</td>
+                                <td>
+                                    Hmmmmmmm
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+    </section>
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
