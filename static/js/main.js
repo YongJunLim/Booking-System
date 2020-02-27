@@ -1,15 +1,34 @@
 // Modals
-var tableRow = document.querySelector('.test-modal');
-var modal = document.querySelector('#'+tableRow.dataset.target);
-var modalClose = document.querySelector(".modal-close");
-var bgClose = document.querySelector(".modal-background");
+var rootEl = document.documentElement;
+var container = document.querySelector(".container");
+var tableRows = container.querySelectorAll("tbody tr");
+var modalCloses = document.querySelectorAll(".modal-close");
+var bgCloses = document.querySelectorAll(".modal-background");
 
-tableRow.addEventListener('click', function(event) {
-    modal.classList.add('is-active');
-});
-modalClose.addEventListener('click', function(event) {
-    modal.classList.remove('is-active');
-});
-bgClose.addEventListener('click', function(event) {
-    modal.classList.remove('is-active');
-});
+if (tableRows.length > 0) {
+    tableRows.forEach(function (el) {
+        var modal = document.querySelector('#'+el.dataset.target);
+        el.addEventListener('click', function () {
+            modal.classList.add('is-active');
+            rootEl.classList.add('is-clipped');
+        });
+    });
+}
+
+if (modalCloses.length > 0) {
+    modalCloses.forEach(function (el) {
+        el.addEventListener('click', function () {
+            el.parentNode.classList.remove('is-active');
+            rootEl.classList.remove('is-clipped');
+        });
+    });
+}
+
+if (bgCloses.length > 0) {
+    bgCloses.forEach(function (el) {
+        el.addEventListener('click', function () {
+            el.parentNode.classList.remove('is-active');
+            rootEl.classList.remove('is-clipped');
+        });
+    });
+}
