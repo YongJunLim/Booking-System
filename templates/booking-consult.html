@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css"
+href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
+{% endblock %}
+
+{% block body %}
+{% block nav %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<section class="section is-centered">
+    <div class="container">
+        <input type='date'>
+    </div>
+</section>
+{% endblock %}
+<script src="{{ url_for('static', filename='js/bulma-calendar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/booking-consult.js') }}"></script>
+{% endblock %}

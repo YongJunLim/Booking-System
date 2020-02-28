@@ -9,3 +9,7 @@ def welcome():
 @app.route('/homepage')
 def index():
     return render_template('index.html',email=True)
+
+@app.route('/booking-consult')
+def bookingConsult():
+    return render_template('booking-consult.html',email=True)
