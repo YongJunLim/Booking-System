@@ -13,3 +13,7 @@ def index():
 @app.route('/booking-consult')
 def bookingConsult():
     return render_template('booking-consult.html',email=True)
+
+@app.route('/create')
+def bookingCreate():
+    return render_template('booking-create.html',email=True)

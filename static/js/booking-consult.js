@@ -6,7 +6,8 @@ var calendars = bulmaCalendar.attach("[type='date']", {
     showHeader: false,
     disabledWeekDays: '0,6',
     weekStart: 1,
-    color: 'info'
+    color: 'info',
+    minDate: new Date,
    });
 
 // Loop on each calendar initialized

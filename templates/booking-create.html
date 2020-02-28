@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css"
+    href="{{ url_for('static', filename='css/booking-create.css') }}">
+{% endblock %}
+
+{% block body %}
+{% block nav %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<section class="section is-centered">
+    <div class="container">
+        <div class="field">
+            <label class="label">Name of Event</label>
+            <div class="control">
+                <input class="input" type="text">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Same Timing for All Days</label>
+            <div class="control">
+                <label class="radio">
+                    <input id="yes-same" type="radio" name="answer">
+                    Yes
+                </label>
+                <label class="radio">
+                    <input id="no-same" type="radio" name="answer">
+                    No
+                </label>
+            </div>
+        </div>
+        <div id="same-timing">
+            <div class="field">
+                <label class="label">Start & End Time</label>
+                <div class="control">
+                    <input type='time'>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Duration of Slots</label>
+                <div class="control">
+                    <input type='time'>
+                </div>
+            </div>
+        </div>
+        <div> <!-- <div id="not-same-timing"> -->
+            <div class="field">
+                <label class="label">Start & End Time (Mon)</label>
+                <div class="control">
+                    <input type='time'>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Duration of Slots</label>
+                <div class="control">
+                    <input type='time'>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button class="button is-link">Submit</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+<script src="{{ url_for('static', filename='js/bulma-calendar.min.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/booking-create.js') }}"></script> -->
+{% endblock %}

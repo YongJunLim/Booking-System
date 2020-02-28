@@ -12,7 +12,25 @@ href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
 {% block content %}
 <section class="section is-centered">
     <div class="container">
-        <input type='date'>
+        <div class="field">
+            <input type='date'>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+            <div class="tags">
+                <span class="tag">Available</span>
+                <span class="tag is-primary">Selected</span>
+                <span class="tag is-dark">Blocked</span>
+                <span class="tag is-success">Booked</span>
+                <span class="tag is-danger">Cancel</span>
+            </div>
+        </div>
+        <table id="slots" class="table is-bordered is-fullwidth">
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </section>
 {% endblock %}
