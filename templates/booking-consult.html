@@ -3,6 +3,8 @@
 {{ super() }}
 <link rel="stylesheet" type="text/css"
 href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
+<link rel="stylesheet" type="text/css"
+href="{{ url_for('static', filename='css/booking-consult.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -24,13 +26,308 @@ href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
                 <span class="tag is-danger">Cancel</span>
             </div>
         </div>
-        <table id="slots" class="table is-bordered is-fullwidth">
-            <tbody>
-                <tr>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+        <!--  <div class="field">
+            <div class="select">
+                <select>
+                    <option>Teacher A</option>
+                    <option>Teacher B</option>
+                    <option>Teacher C</option>
+                </select>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label has-text-centered">Teacher A</label>
+            <div class="table-container">
+                <table id="is-desktop-1" class="table is-bordered is-fullwidth">
+                    <tbody>
+                        <tr>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                            <td class="has-text-weight-bold">10:00am<br> - 10:20am</td>
+                        </tr>
+                        <tr>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                            <td><br><br></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+        <div class="field">
+            <table id="is-mobile" class="table is-bordered is-fullwidth">
+                <tbody>
+                    <tr>
+                        <td class="has-text-weight-bold">Teachers</td>
+                        <td class="has-text-weight-bold">Teacher A</td>
+                        <td class="has-text-weight-bold">Teacher B</td>
+                        <td class="has-text-weight-bold">Teacher C</td>
+                        <td class="has-text-weight-bold">Teacher D</td>
+                        <td class="has-text-weight-bold">Teacher E</td>
+                        <td class="has-text-weight-bold">Teacher F</td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="has-text-weight-bold">10:00am - 10:20am</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+            <button type="submit" name="Bookings"
+            class="button is-link">
+                Update Booking
+            </button>
+        </div>
+
     </div>
 </section>
 {% endblock %}

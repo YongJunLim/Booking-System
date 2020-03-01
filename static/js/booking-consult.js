@@ -26,3 +26,6 @@ if (element) {
 		console.log(datepicker.data.value());
 	});
 }
+
+var update = document.querySelector('button.is-link');
+var table = document.getElementById('is-mobile');
