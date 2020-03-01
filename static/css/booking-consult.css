@@ -1,5 +1,10 @@
-.table td {
-    max-width: 1%;
+td.has-text-weight-bold {
+    max-width: 3vmin;
+}
+
+div.hidden {
+    display: none;
+    max-height: 0px;
 }
 
 .table td.is-booked {

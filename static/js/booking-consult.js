@@ -27,5 +27,14 @@ if (element) {
 	});
 }
 
-var update = document.querySelector('button.is-link');
-var table = document.getElementById('is-mobile');
+var selectElem = document.querySelector("select");
+
+selectElem.addEventListener('change', function() {
+    var selectTeachIndex = selectElem.selectedIndex;
+    var newSelect = document.querySelector("#Option"+selectTeachIndex);
+    var oldSelect = document.getElementsByClassName("shown")[0];
+    if (oldSelect != newSelect) { // to prevent accidental hiding of all tables
+        newSelect.classList.replace("hidden","shown");
+        oldSelect.classList.replace("shown","hidden");
+    };
+});
