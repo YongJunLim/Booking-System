@@ -39,5 +39,3 @@ def bookingConsult():
 @app.route('/create')
 def bookingCreate():
     return render_template('booking-create.html',email=True)
-
-app.run()
