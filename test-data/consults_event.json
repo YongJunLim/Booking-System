@@ -1,0 +1,34 @@
+[
+    [
+        {
+            "person_name": "Teacher A",
+            "person_email": "teacherA@dhs.sg",
+            "date": "30 June 2020",
+            "time": "12:00pm",
+            "ref_code": "abc123"
+        },
+        {
+            "person_name": "Teacher A",
+            "person_email": "teacherA@dhs.sg",
+            "date": "1 July 2020",
+            "time": "2:00pm",
+            "ref_code": "abc123"
+        }
+    ],
+    [
+        {
+            "person_name": "Teacher B",
+            "person_email": "teacherB@dhs.sg",
+            "date": "1 July 2020",
+            "time": "12:00pm",
+            "ref_code": "def456"
+        },
+        {
+            "person_name": "Teacher B",
+            "person_email": "teacherB@dhs.sg",
+            "date": "1 July 2020",
+            "time": "5:00pm",
+            "ref_code": "def456"
+        }
+    ]
+]

@@ -24,6 +24,11 @@ href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
                 <span class="tag is-danger">Cancel</span>
             </div>
         </div>
+        <label for="sorting">Display by:</label>
+        <select id="sorting">
+            <option value="time">Time</option>
+            <option value="event">Event</option>
+        </select id="sorting">
         <table id="slots" class="table is-bordered is-fullwidth">
             <tbody>
                 <tr>
