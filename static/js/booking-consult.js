@@ -26,3 +26,15 @@ if (element) {
 		console.log(datepicker.data.value());
 	});
 }
+
+var selectElem = document.querySelector("select");
+
+selectElem.addEventListener('change', function() {
+    var selectTeachIndex = selectElem.selectedIndex;
+    var newSelect = document.querySelector("#Option"+selectTeachIndex);
+    var oldSelect = document.getElementsByClassName("shown")[0];
+    if (oldSelect != newSelect) { // to prevent accidental hiding of all tables
+        newSelect.classList.replace("hidden","shown");
+        oldSelect.classList.replace("shown","hidden");
+    };
+});

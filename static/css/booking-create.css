@@ -1,11 +1,7 @@
-#not-same-timing {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
+.select:not(.is-multiple):not(.is-loading)::after {
+    z-index: unset;
 }
 
-#no-same:checked ~ #not-same-timing {
-    opacity: 1;
-    max-height: 100px; /* little bit of a magic number :( */
-    overflow: visible;
+div.timepicker-input-number, .datetimepicker .timepicker .timepicker-time-divider {
+    color: #209cee;
 }

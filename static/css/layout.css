@@ -21,6 +21,9 @@ body, input, button {
 		border-top: 2px solid hsl(217, 71%, 53%);
 		/* adapted from has-background-info color */
 	}
+	.navbar-item img {
+		width: auto;
+	}
 }
 
 @media (max-width: 1024px) {

@@ -3,6 +3,8 @@
 {{ super() }}
 <link rel="stylesheet" type="text/css"
 href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
+<link rel="stylesheet" type="text/css"
+href="{{ url_for('static', filename='css/booking-consult.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -36,6 +38,144 @@ href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
                 </tr>
             </tbody>
         </table>
+        <div class="field is-grouped is-grouped-centered">
+            <div class="select">
+                <select>
+                    <option selected>Teacher A</option>
+                    <option>Teacher B</option>
+                    <option>Teacher C</option>
+                </select>
+            </div>
+        </div>
+        <div class="field">
+            <div id="Option0" class="shown">
+                <h1 class="has-text-weight-bold has-text-centered is-size-3">Teacher A</h1>
+                <table id="t1" class="table is-bordered is-fullwidth">
+                    <tbody>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="field">
+            <div id="Option1" class="hidden">
+                <h1 class="has-text-weight-bold has-text-centered is-size-3">Teacher B</h1>
+                <table class="table is-bordered is-fullwidth">
+                    <tbody>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">11:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="field">
+            <div id="Option2" class="hidden">
+                <h1 class="has-text-weight-bold has-text-centered is-size-3">Teacher C</h1>
+                <table class="table is-bordered is-fullwidth">
+                    <tbody>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">12:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+            <button type="submit" name="Bookings"
+            class="button is-link">
+                Update Booking
+            </button>
+        </div>
     </div>
 </section>
 {% endblock %}

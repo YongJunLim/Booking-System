@@ -1,0 +1,28 @@
+div.tags {
+    justify-content: center;
+}
+
+td.has-text-weight-bold {
+    max-width: 3vmin;
+}
+
+div.hidden {
+    display: none;
+    max-height: 0px;
+}
+
+.table td.is-booked {
+    background-color: #23D160;
+}
+
+.table td.is-blocked {
+    background-color: #363636;
+}
+
+.table td.is-selected {
+    background-color: #00D1B2;
+}
+
+.table td.is-cancelled {
+    background-color: #FF3860;
+}
