@@ -4,8 +4,8 @@ import json
 app = Flask(__name__)
 
 @app.route('/')
-def welcome():
-    return render_template('welcome.html')
+def home(): # --- to be merged with backend ---
+    return render_template('home.html')
 
 @app.route('/homepage')
 def view_by_time():
@@ -29,8 +29,6 @@ def view_by_event():
         specials = json.load(f)
 
     return render_template('view-by-event.html', email=True, consults=consults, specials=specials)
-
-
 
 @app.route('/booking-consult')
 def bookingConsult():
