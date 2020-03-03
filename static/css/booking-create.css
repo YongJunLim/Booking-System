@@ -1,0 +1,7 @@
+.select:not(.is-multiple):not(.is-loading)::after {
+    z-index: unset;
+}
+
+div.timepicker-input-number, .datetimepicker .timepicker .timepicker-time-divider {
+    color: #209cee;
+}
