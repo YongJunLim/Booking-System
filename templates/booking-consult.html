@@ -26,6 +26,18 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
                 <span class="tag is-danger">Cancel</span>
             </div>
         </div>
+        <label for="sorting">Display by:</label>
+        <select id="sorting">
+            <option value="time">Time</option>
+            <option value="event">Event</option>
+        </select id="sorting">
+        <table id="slots" class="table is-bordered is-fullwidth">
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
         <div class="field is-grouped is-grouped-centered">
             <div class="select">
                 <select>
@@ -164,7 +176,6 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
                 Update Booking
             </button>
         </div>
-
     </div>
 </section>
 {% endblock %}
