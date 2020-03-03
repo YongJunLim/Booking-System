@@ -100,6 +100,7 @@ createBooking.addEventListener('click', function(event) {
         addConfigArray.push(document.getElementsByClassName('customDate flatpickr-input')[i].value);
         addConfigArray.push(document.getElementsByClassName('customStartTime flatpickr-input')[i].value);
         addConfigArray.push(document.getElementsByClassName('customEndTime flatpickr-input')[i].value);
+        addConfigArray.push(document.getElementsByTagName('select')[i+1].selectedOptions[0].label);
         console.log(addConfigArray);
         customBookingData.push(addConfigArray);
     };
