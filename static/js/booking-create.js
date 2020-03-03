@@ -7,13 +7,13 @@ flatpickr("#dateRange", {
     dateFormat: "Y-m-d"
 });
 
-flatpickr(".startTime", {
+flatpickr("#startTime", {
     enableTime: true,
     noCalendar: true,
     dateFormat: "h:i K",
 });
 
-flatpickr(".endTime", {
+flatpickr("#endTime", {
     enableTime: true,
     noCalendar: true,
     dateFormat: "h:i K",
@@ -56,9 +56,16 @@ var addConfigHTML = `
 var addConfig = document.querySelector('.button.is-primary');
 
 addConfig.addEventListener('click', function(event) {
+    var range = document.getElementById('dateRange').value
+    if (range != "") {
+        var startDate = range.split(" to ")[0];
+        var endDate = range.split(" to ")[1];
+    }
     document.getElementById("addConfigField").insertAdjacentHTML("afterend", addConfigHTML);
     flatpickr(".customDate", {
-        minDate: "today",
+        weekNumbers: true,
+        minDate: startDate,
+        maxDate: endDate,
         altInput: true,
         altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
         dateFormat: "Y-m-d"
@@ -77,4 +84,25 @@ addConfig.addEventListener('click', function(event) {
     });
 });
 
+var createBooking = document.querySelector('.button.is-link');
+var customBookingData = []
 
+createBooking.addEventListener('click', function(event) {
+    createBooking.classList.add('is-loading');
+    customBookingData.push(document.getElementById('eventName').value);
+    customBookingData.push(document.getElementById('dateRange').value);
+    customBookingData.push(document.getElementById('startTime').value);
+    customBookingData.push(document.getElementById('endTime').value);
+    customBookingData.push(document.getElementsByTagName('select')[0].selectedOptions[0].label);
+    var customLength = document.getElementsByClassName('customDate flatpickr-input').length - 1;
+    for (let i = 0; i <= customLength; i++) {
+        var addConfigArray = [];
+        addConfigArray.push(document.getElementsByClassName('customDate flatpickr-input')[i].value);
+        addConfigArray.push(document.getElementsByClassName('customStartTime flatpickr-input')[i].value);
+        addConfigArray.push(document.getElementsByClassName('customEndTime flatpickr-input')[i].value);
+        console.log(addConfigArray);
+        customBookingData.push(addConfigArray);
+    };
+    console.log(customBookingData);
+    alert(JSON.stringify(customBookingData));
+});

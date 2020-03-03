@@ -17,7 +17,7 @@ href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <div class="field">
             <label class="label">Name of Event</label>
             <div class="control">
-                <input class="input" type="text">
+                <input class="input" id="eventName" type="text">
             </div>
         </div>
         <div class="field">
@@ -29,13 +29,13 @@ href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <div class="field">
             <label class="label">Start Time</label>
             <div class="control">
-                <input class="input startTime" type="text">
+                <input class="input" id="startTime" type="text">
             </div>
         </div>
         <div class="field">
             <label class="label">End Time</label>
             <div class="control">
-                <input class="input endTime" type="text">
+                <input class="input" id="endTime" type="text">
             </div>
         </div>
         <div class="field">
@@ -58,7 +58,7 @@ href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         </div>
         <div class="field">
             <div class="control">
-                <form action="/create" method="POST">
+                <form action="/create">
                     <button type="submit" name="create-booking"
                     class="button is-link">
                         Create Booking
