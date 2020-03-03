@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css"
 href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
 <link rel="stylesheet" type="text/css"
-href="{{ url_for('static', filename='css/booking-create.css') }}">
+href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 {% endblock %}
 
 {% block body %}
@@ -22,11 +22,21 @@ href="{{ url_for('static', filename='css/booking-create.css') }}">
         </div>
         <div class="field">
             <label class="label">Date Range of Event</label>
-            <input type="date">
+            <div class="control">
+                <input class="input" id="dateRange" type="text">
+            </div>
         </div>
         <div class="field">
-            <label class="label">Start and End Time</label>
-            <input type='time'>
+            <label class="label">Start Time</label>
+            <div class="control">
+                <input class="input startTime" type="text">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">End Time</label>
+            <div class="control">
+                <input class="input endTime" type="text">
+            </div>
         </div>
         <div class="field">
             <label class="label">Duration of Slots</label>
@@ -41,9 +51,24 @@ href="{{ url_for('static', filename='css/booking-create.css') }}">
                 </select>
             </div>
         </div>
+        <div id="addConfigField" class="field">
+            <button class="button is-primary">
+                Additional Configuration
+            </button>
+        </div>
+        <div class="field">
+            <div class="control">
+                <form action="/create" method="POST">
+                    <button type="submit" name="create-booking"
+                    class="button is-link">
+                        Create Booking
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}
-<script src="{{ url_for('static', filename='js/bulma-calendar.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.3/flatpickr.min.js"></script>
 <script src="{{ url_for('static', filename='js/booking-create.js') }}"></script>
 {% endblock %}

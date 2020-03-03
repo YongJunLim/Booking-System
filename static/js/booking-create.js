@@ -1,63 +1,80 @@
-// Initialize all input of type date
-var calendars = bulmaCalendar.attach("[type='date']", {
-    dateFormat: "DD MMM YYYY",
-    type: 'date',
-    showClearButton: true,
-    showHeader: false,
-    weekStart: 1,
-    color: 'info',
-    minDate: new Date,
-    isRange: true
-   });
+flatpickr("#dateRange", {
+    mode: "range",
+    minDate: "today",
+    weekNumbers: true,
+    altInput: true,
+    altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
+    dateFormat: "Y-m-d"
+});
 
-/*    document.getElementsByClassName('input#event-event_start_datetime').val(incomingDate);
-   document.getElementsByClassName('.datetimepicker-dummy-input.is-datetimepicker-range').val(incomingStartDate);
-   document.getElementsByClassName('.timepicker-start .timepicker-hours .timepicker-input-number').text(incomingStartHours);
-   document.getElementsByClassName('.datetimepicker-selection-start .datetimepicker-selection-hour').text(incomingStartHours + ':' + incomingStartMinutes);
-   document.getElementsByClassName('.timepicker-start .timepicker-minutes .timepicker-input-number').text(incomingStartMinutes);
- */
-// Loop on each calendar initialized
-for(var i = 0; i < calendars.length; i++) {
-	// Add listener to date:selected event
-	calendars[i].on('select', date => {
-		console.log(date);
-	});
-}
+flatpickr(".startTime", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "h:i K",
+});
 
-// To access to bulmaCalendar instance of an element
-var element = document.querySelector("input[type='date']");
-if (element) {
-	// bulmaCalendar instance is available as element.bulmaCalendar
-	element.bulmaCalendar.on('select', function(datepicker) {
-		console.log(datepicker.data.value());
-	});
-}
+flatpickr(".endTime", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "h:i K",
+});
 
-// Initialize all input of type time
-var timeRanges = bulmaCalendar.attach("[type='time']", {
-    type: 'time',
-    showClearButton: true,
-    color: 'info',
-    isRange: true,
-    minuteSteps: 5
-   });
+var addConfigHTML = `
+<div class="field">
+    <label class="label">Custom Date</label>
+    <div class="control">
+        <input class="input customDate" type="text">
+    </div>
+</div>
+<div class="field">
+    <label class="label">Start Time</label>
+    <div class="control">
+        <input class="input customStartTime" type="text">
+    </div>
+</div>
+<div class="field">
+    <label class="label">End Time</label>
+    <div class="control">
+        <input class="input customEndTime" type="text">
+    </div>
+</div>
+<div class="field">
+    <label class="label">Duration of Slots</label>
+    <div class="select">
+        <select>
+            <option value="">Select Duration</option>
+            <option value="5">5min</option>
+            <option value="10">10min</option>
+            <option value="15">15min</option>
+            <option value="20">20min</option>
+            <option value="30">30min</option>
+        </select>
+    </div>
+</div>
+`;
 
-// Loop on each calendar initialized
-for(var i = 0; i < timeRanges.length; i++) {
-	// Add listener to date:selected event
-	timeRanges[i].on('select', time => {
-		console.log(time);
-	});
-}
+var addConfig = document.querySelector('.button.is-primary');
 
-// To access to bulmaCalendar instance of an element
-var timeElement = document.querySelector("input[type='time']");
-if (timeElement) {
-	// bulmaCalendar instance is available as element.bulmaCalendar
-	timeElement.bulmaCalendar.on('select', function(timepicker) {
-		console.log(timepicker.data.value());
-	});
-}
+addConfig.addEventListener('click', function(event) {
+    document.getElementById("addConfigField").insertAdjacentHTML("afterend", addConfigHTML);
+    flatpickr(".customDate", {
+        minDate: "today",
+        altInput: true,
+        altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
+        dateFormat: "Y-m-d"
+    });
 
-var addConfig = document.querySelector('#add-config');
+    flatpickr(".customStartTime", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "h:i K",
+    });
+
+    flatpickr(".customEndTime", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "h:i K",
+    });
+});
+
 
