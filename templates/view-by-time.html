@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% block nav %}
+        {{ super() }}
+    {% endblock %}
+    {% block content %}
+    <section class="section is-centered">
+        <div class="container">
+
+            <label>Display by: </label>
+            <form style="display: inline;" action="/sort_by_event">
+                <input type="submit" value="Event">
+            </form>
+            <h1 class="title">Upcoming Consultations</h1>
+            <table class="table is-fullwidth is-hoverable">
+                <thead>
+                    <tr>
+                    <th>With Who</th>
+                    <th>Time Booked</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(consults | length) %}
+                    <tr data-target="modal_consult_{{i+1}}">
+                        <td>{{consults[i]["person_name"]}}</td>
+                        <td>
+                            {{consults[i]["date"]}}
+                            <br />
+                            {{consults[i]["time"]}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h1 class="title">Upcoming Special Events</h1>
+            <h2 class="subtitle">2020 Y5 PTM</h2>
+            <table class="table is-fullwidth is-hoverable">
+                <thead>
+                    <tr>
+                    <th>With Who</th>
+                    <th>Time Booked</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(specials | length) %}
+                    <tr data-target="modal_special_{{i+1}}">
+                        <td>{{specials[i]["person_name"]}}</td>
+                        <td>
+                            {{specials[i]["date"]}}
+                            <br />
+                            {{specials[i]["time"]}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% for i in range(consults | length) %}
+        <div id="modal_consult_{{i+1}}" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <table class="table is-fullwidth is-hoverable">
+                        <tbody>
+                            <tr>
+                                <td class="has-text-weight-bold">With Who</td>
+                                <td>
+                                    {{consults[i]["person_name"]}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Email</td>
+                                <td>
+                                    {{consults[i]["person_email"]}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Time Booked</td>
+                                <td>
+                                    {{consults[i]["date"]}}<br>
+                                    {{consults[i]["time"]}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Reference Code</td>
+                                <td>
+                                   {{consults[i]["ref_code"]}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button class="modal-close is-large"></button>
+        </div>
+        {% endfor %}
+        {% for i in range(specials | length) %}
+        <div id="modal_special_{{i+1}}" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <table class="table is-fullwidth is-hoverable">
+                        <tbody>
+                            <tr>
+                                <td class="has-text-weight-bold">With Who</td>
+                                <td>
+                                    {{specials[i]["person_name"]}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Email</td>
+                                <td>
+                                    {{specials[i]["person_email"]}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Time Booked</td>
+                                <td>
+                                    {{specials[i]["date"]}}<br>
+                                    {{specials[i]["time"]}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Reference Code</td>
+                                <td>
+                                    {{specials[i]["ref_code"]}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button class="modal-close is-large"></button>
+        </div>
+        {% endfor %}
+        
+    </section>
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
