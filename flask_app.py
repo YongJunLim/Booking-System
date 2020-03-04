@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import json
 
 app = Flask(__name__)
@@ -35,8 +35,12 @@ def bookingConsult():
     if request.method == 'GET':
         return render_template('booking-consult.html',email=True)
     elif request.method == 'POST':
-        cherName = request.form.get('cherName')
-        return render_template("booking-consult.html", email=True, cherName = cherName)
+        if request.form['cherName']:
+            cherName = request.form.get('cherName')
+            return render_template("booking-consult.html", email=True, cherName = cherName)
+        elif request.form['Bookings']:
+            # YH do yr thing
+            return redirect(url_for('bookingConsult'))
 
 @app.route('/create', methods=['POST', 'GET'])
 def bookingCreate():

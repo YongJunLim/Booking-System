@@ -1,8 +1,6 @@
-var currHours = new Date();
 var update = document.querySelector('button.is-link');
 var table = document.getElementById('consultation-booking');
 var selects = [];
-
 
 var ID = function () {
   return '_' + Math.random().toString(36).substr(2, 6);
@@ -13,16 +11,13 @@ update.addEventListener('click', function(event) {
     for (var i = 0, row; row = table.rows[i]; i++) {
     // iterate through rows
     // rows would be accessed using the "row" variable assigned in the for loop
-        for (var j = 1, col; col = row.cells[j]; j++) { // i = 1 instead of 0 to not count the first col aka timings
-        // iterate through columns
-        // columns would be accessed using the "col" variable assigned in the for loop
-            if (table.rows[i].cells[j].className == 'is-selected' || table.rows[i].cells[j].className == 'is-booked') {
-                selects.push(table.rows[i].cells[0].querySelector("#teacher").textContent)
-                selects.push(table.rows[0].cells[j].id)
-            }
+        if (table.rows[i].cells[1].className == 'is-selected' || table.rows[i].cells[1].className == 'is-booked') {
+            selects.push(table.rows[i].cells[0].textContent);
         }
     }
-    document.querySelector('.button.is-link').value = selects
+    console.log(selects);
+    document.querySelector('.button.is-link').value = selects;
+    alert(JSON.stringify(selects));
 });
 
 for (var i = 0, row; row = table.rows[i]; i++) {

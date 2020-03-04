@@ -3,8 +3,10 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body>{% extends "layout.html" %}
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" type="text/css" href="./booking-consult_files/bulma-calendar.min.css&#39;) }}">
-<link rel="stylesheet" type="text/css" href="./booking-consult_files/booking-consult.css&#39;) }}">
+<link rel="stylesheet" type="text/css"
+href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
+<link rel="stylesheet" type="text/css"
+href="{{ url_for('static', filename='css/booking-consult.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -27,7 +29,7 @@
             </div>
         </div>
         <div class="field is-grouped is-grouped-centered">
-            <form action="https://www.pythonanywhere.com/user/proofofconcept/files/home/proofofconcept/mysite/templates/%7B%7B%20url_for(&#39;bookingConsult&#39;)%20%7D%7D" method="post">
+            <form action="/booking-consult" method="POST">
             <input type="text" class="searchbar" name="cherName" placeholder="Enter your teacher&#39;s name here!">
             <input type="submit" class="button" required="">
         </form></div>
@@ -39,35 +41,35 @@
                 <table id="consultation-booking" class="table is-bordered is-fullwidth">
                     <tbody>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="1" class="has-text-weight-bold has-text-centered">7:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="2" class="has-text-weight-bold has-text-centered">8:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="3" class="has-text-weight-bold has-text-centered">9:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="4" class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="5" class="has-text-weight-bold has-text-centered">11:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="6" class="has-text-weight-bold has-text-centered">12:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="7" class="has-text-weight-bold has-text-centered">1:00pm - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="8" class="has-text-weight-bold has-text-centered">2:00pm - 10:20am</td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -82,35 +84,35 @@
                 <table id="consultation-booking" class="table is-bordered is-fullwidth">
                     <tbody>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">11:00am - 10:20am</td>
+                            <td id="1" class="has-text-weight-bold has-text-centered">7:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="2" class="has-text-weight-bold has-text-centered">8:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="3" class="has-text-weight-bold has-text-centered">9:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="4" class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="5" class="has-text-weight-bold has-text-centered">11:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="6" class="has-text-weight-bold has-text-centered">12:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="7" class="has-text-weight-bold has-text-centered">1:00pm - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="8" class="has-text-weight-bold has-text-centered">2:00pm - 10:20am</td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -125,35 +127,35 @@
                 <table id="consultation-booking" class="table is-bordered is-fullwidth">
                     <tbody>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">12:00am - 10:20am</td>
+                            <td id="1" class="has-text-weight-bold has-text-centered">7:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="2" class="has-text-weight-bold has-text-centered">8:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="3" class="has-text-weight-bold has-text-centered">9:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="4" class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="5" class="has-text-weight-bold has-text-centered">11:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="6" class="has-text-weight-bold has-text-centered">12:00am - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="7" class="has-text-weight-bold has-text-centered">1:00pm - 10:20am</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
+                            <td id="8" class="has-text-weight-bold has-text-centered">2:00pm - 10:20am</td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -173,7 +175,9 @@
     </div>
 </section>
 {% endblock %}
-<script src="./booking-consult_files/bulma-calendar.min.js&#39;) }}"></script>
-<script src="./booking-consult_files/dashboard.js&#39;) }}"></script>
-<script src="./booking-consult_files/booking-consult.js&#39;) }}"></script>
+<script src="{{ url_for('static', filename='js/bulma-calendar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/booking-consult.js') }}"></script>
+{% if cherName %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endif %}
 {% endblock %}</body></html>
