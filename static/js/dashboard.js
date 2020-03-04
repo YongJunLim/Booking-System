@@ -12,7 +12,7 @@ update.addEventListener('click', function(event) {
     // iterate through rows
     // rows would be accessed using the "row" variable assigned in the for loop
         if (table.rows[i].cells[1].className == 'is-selected' || table.rows[i].cells[1].className == 'is-booked') {
-            selects.push(table.rows[i].cells[0].textContent);
+            selects.push(table.rows[i].cells[0].textContent.split(" - "));
         }
     }
     console.log(selects);
