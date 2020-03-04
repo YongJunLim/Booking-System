@@ -1,10 +1,10 @@
-{% extends "layout.html" %}
+
+<!-- saved from url=(0114)https://www.pythonanywhere.com/user/proofofconcept/files/home/proofofconcept/mysite/templates/booking-consult.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style></style></head><body>{% extends "layout.html" %}
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" type="text/css"
-href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
-<link rel="stylesheet" type="text/css"
-href="{{ url_for('static', filename='css/booking-consult.css') }}">
+<link rel="stylesheet" type="text/css" href="./booking-consult_files/bulma-calendar.min.css&#39;) }}">
+<link rel="stylesheet" type="text/css" href="./booking-consult_files/booking-consult.css&#39;) }}">
 {% endblock %}
 
 {% block body %}
@@ -15,7 +15,7 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
 <section class="section is-centered">
     <div class="container">
         <div class="field">
-            <input type='date'>
+            <input type="date">
         </div>
         <div class="field is-grouped is-grouped-centered">
             <div class="tags">
@@ -26,31 +26,17 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
                 <span class="tag is-danger">Cancel</span>
             </div>
         </div>
-        <label for="sorting">Display by:</label>
-        <select id="sorting">
-            <option value="time">Time</option>
-            <option value="event">Event</option>
-        </select id="sorting">
-        <table id="slots" class="table is-bordered is-fullwidth">
-            <tbody>
-                <tr>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
         <div class="field is-grouped is-grouped-centered">
-            <div class="select">
-                <select>
-                    <option selected>Teacher A</option>
-                    <option>Teacher B</option>
-                    <option>Teacher C</option>
-                </select>
-            </div>
-        </div>
+            <form action="https://www.pythonanywhere.com/user/proofofconcept/files/home/proofofconcept/mysite/templates/%7B%7B%20url_for(&#39;bookingConsult&#39;)%20%7D%7D" method="post">
+            <input type="text" class="searchbar" name="cherName" placeholder="Enter your teacher&#39;s name here!">
+            <input type="submit" class="button" required="">
+        </form></div>
+
+        {% if cherName == "Mr Teo" %}
         <div class="field">
-            <div id="Option0" class="shown">
-                <h1 class="has-text-weight-bold has-text-centered is-size-3">Teacher A</h1>
-                <table id="t1" class="table is-bordered is-fullwidth">
+            <div id="Option0">
+                <h1 id="teacher" class="has-text-weight-bold has-text-centered is-size-3">Mr Teo</h1>
+                <table id="consultation-booking" class="table is-bordered is-fullwidth">
                     <tbody>
                         <tr>
                             <td class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
@@ -88,10 +74,12 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
                 </table>
             </div>
         </div>
+
+        {% elif cherName == "Ms Lim" %}
         <div class="field">
-            <div id="Option1" class="hidden">
-                <h1 class="has-text-weight-bold has-text-centered is-size-3">Teacher B</h1>
-                <table class="table is-bordered is-fullwidth">
+            <div id="Option1">
+                <h1 id="teacher" class="has-text-weight-bold has-text-centered is-size-3">Ms Lim</h1>
+                <table id="consultation-booking" class="table is-bordered is-fullwidth">
                     <tbody>
                         <tr>
                             <td class="has-text-weight-bold has-text-centered">11:00am - 10:20am</td>
@@ -129,10 +117,12 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
                 </table>
             </div>
         </div>
+
+        {% elif cherName == "Mr Chong" %}
         <div class="field">
-            <div id="Option2" class="hidden">
-                <h1 class="has-text-weight-bold has-text-centered is-size-3">Teacher C</h1>
-                <table class="table is-bordered is-fullwidth">
+            <div id="Option2">
+                <h1 id="teacher" class="has-text-weight-bold has-text-centered is-size-3">Mr Chong</h1>
+                <table id="consultation-booking" class="table is-bordered is-fullwidth">
                     <tbody>
                         <tr>
                             <td class="has-text-weight-bold has-text-centered">12:00am - 10:20am</td>
@@ -170,15 +160,20 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
                 </table>
             </div>
         </div>
+        {% endif %}
+
+        {% if cherName == "Mr Teo" or cherName == "Mr Chong" or cherName == "Ms Lim" %}
         <div class="field is-grouped is-grouped-centered">
-            <button type="submit" name="Bookings"
-            class="button is-link">
+            <button type="submit" name="Bookings" class="button is-link">
                 Update Booking
             </button>
         </div>
+        {% endif %}
+
     </div>
 </section>
 {% endblock %}
-<script src="{{ url_for('static', filename='js/bulma-calendar.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/booking-consult.js') }}"></script>
-{% endblock %}
+<script src="./booking-consult_files/bulma-calendar.min.js&#39;) }}"></script>
+<script src="./booking-consult_files/dashboard.js&#39;) }}"></script>
+<script src="./booking-consult_files/booking-consult.js&#39;) }}"></script>
+{% endblock %}</body></html>

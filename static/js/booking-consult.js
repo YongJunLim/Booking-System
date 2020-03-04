@@ -28,7 +28,7 @@ if (element) {
 }
 
 var selectElem = document.querySelector("select");
-
+/*
 selectElem.addEventListener('change', function() {
     var selectTeachIndex = selectElem.selectedIndex;
     var newSelect = document.querySelector("#Option"+selectTeachIndex);
@@ -38,3 +38,4 @@ selectElem.addEventListener('change', function() {
         oldSelect.classList.replace("shown","hidden");
     };
 });
+*/

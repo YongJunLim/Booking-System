@@ -30,9 +30,13 @@ def view_by_event():
 
     return render_template('view-by-event.html', email=True, consults=consults, specials=specials)
 
-@app.route('/booking-consult')
+@app.route('/booking-consult', methods=["GET", "POST"])
 def bookingConsult():
-    return render_template('booking-consult.html',email=True)
+    if request.method == 'GET':
+        return render_template('booking-consult.html',email=True)
+    elif request.method == 'POST':
+        cherName = request.form.get('cherName')
+        return render_template("booking-consult.html", email=True, cherName = cherName)
 
 @app.route('/create', methods=['POST', 'GET'])
 def bookingCreate():
