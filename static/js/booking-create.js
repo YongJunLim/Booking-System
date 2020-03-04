@@ -57,7 +57,10 @@ var addConfig = document.querySelector('.button.is-primary');
 
 addConfig.addEventListener('click', function(event) {
     var range = document.getElementById('dateRange').value
-    if (range != "") {
+    if (range != "" && range.length == 10) { // one day only
+        var startDate = range;
+        var endDate = range;
+    } else if (range != "") {
         var startDate = range.split(" to ")[0];
         var endDate = range.split(" to ")[1];
     }
@@ -90,10 +93,12 @@ var customBookingData = []
 createBooking.addEventListener('click', function(event) {
     createBooking.classList.add('is-loading');
     customBookingData.push(document.getElementById('eventName').value);
-    customBookingData.push(document.getElementById('dateRange').value);
-    customBookingData.push(document.getElementById('startTime').value);
-    customBookingData.push(document.getElementById('endTime').value);
-    customBookingData.push(document.getElementsByTagName('select')[0].selectedOptions[0].label);
+    var details = []
+    details.push(document.getElementById('dateRange').value);
+    details.push(document.getElementById('startTime').value);
+    details.push(document.getElementById('endTime').value);
+    details.push(document.getElementsByTagName('select')[0].selectedOptions[0].label);
+    customBookingData.push(details);
     var customLength = document.getElementsByClassName('customDate flatpickr-input').length - 1;
     for (let i = 0; i <= customLength; i++) {
         var addConfigArray = [];
@@ -101,9 +106,9 @@ createBooking.addEventListener('click', function(event) {
         addConfigArray.push(document.getElementsByClassName('customStartTime flatpickr-input')[i].value);
         addConfigArray.push(document.getElementsByClassName('customEndTime flatpickr-input')[i].value);
         addConfigArray.push(document.getElementsByTagName('select')[i+1].selectedOptions[0].label);
-        console.log(addConfigArray);
         customBookingData.push(addConfigArray);
     };
     console.log(customBookingData);
+    document.querySelector('.button.is-link').value = JSON.stringify(customBookingData);
     alert(JSON.stringify(customBookingData));
 });
