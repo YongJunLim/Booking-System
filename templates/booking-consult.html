@@ -4,7 +4,7 @@
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" type="text/css"
-href="{{ url_for('static', filename='css/bulma-calendar.min.css') }}">
+href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <link rel="stylesheet" type="text/css"
 href="{{ url_for('static', filename='css/booking-consult.css') }}">
 {% endblock %}
@@ -17,7 +17,9 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
 <section class="section is-centered">
     <div class="container">
         <div class="field">
-            <input type="date">
+            <div class="control">
+                <input class="input" id="dateConsult" type="text">
+            </div>
         </div>
         <div class="field is-grouped is-grouped-centered">
             <div class="tags">
@@ -30,9 +32,10 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
         </div>
         <div class="field is-grouped is-grouped-centered">
             <form action="/booking-consult" method="POST">
-            <input type="text" class="searchbar" name="cherName" placeholder="Enter your teacher&#39;s name here!">
-            <input type="submit" class="button" required="">
-        </form></div>
+                <input type="text" class="searchbar" name="cherName" placeholder="Enter your teacher&#39;s name here!">
+                <input type="submit" class="button" required="">
+            </form>
+        </div>
 
         {% if cherName == "Mr Teo" %}
         <div class="field">
@@ -175,7 +178,7 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
     </div>
 </section>
 {% endblock %}
-<script src="{{ url_for('static', filename='js/bulma-calendar.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.3/flatpickr.min.js"></script>
 <script src="{{ url_for('static', filename='js/booking-consult.js') }}"></script>
 {% if cherName %}
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
