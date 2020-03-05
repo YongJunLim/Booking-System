@@ -53,7 +53,7 @@ def bookingCreate():
 
         # array_2d = ["Yeet",["2020-03-05 to 2020-03-07","12:00 PM","6:00 PM","15min"],["2020-03-06","6:00 AM","12:00 PM","30min"]]
         # Replace placeholder
-        array_2d = request.form['createBooking']
+        array_2d = request.form['create-booking']
 
         # Need ref_code algorithm
         # Need data 2d_array from the page
