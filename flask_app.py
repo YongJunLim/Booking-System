@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, redirect, url_for, request
 import json
 
 app = Flask(__name__)
@@ -47,12 +47,17 @@ def bookingCreate():
     if request.method == 'GET':
         return render_template('booking-create.html',email=True)
     elif request.method == 'POST':
-        # for Yu Hsuan to send to database
-        """ Original Code
-        DB_in_slot = request.form['Bookings']
-        DB_in_slot = manipulate(DB_in_slot) #2D Array
-        remove(DB_in_slot, email, outTeachers)
-        To replace request.form['Bookings']
-        with request.form['create-booking']
-         """
+
+        ref_code = "Biku"
+        # Replace placeholder
+
+        # array_2d = ["Yeet",["2020-03-05 to 2020-03-07","12:00 PM","6:00 PM","15min"],["2020-03-06","6:00 AM","12:00 PM","30min"]]
+        # Replace placeholder
+        array_2d = request.form['createBooking']
+
+        # Need ref_code algorithm
+        # Need data 2d_array from the page
+
+        # create_event(array_2d, ref_code)
+
         return redirect(url_for('bookingCreate'))

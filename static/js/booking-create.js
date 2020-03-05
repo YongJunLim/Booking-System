@@ -110,5 +110,4 @@ createBooking.addEventListener('click', function(event) {
     };
     console.log(customBookingData);
     document.querySelector('.button.is-link').value = JSON.stringify(customBookingData);
-    alert(JSON.stringify(customBookingData));
 });
