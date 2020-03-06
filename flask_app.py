@@ -37,7 +37,8 @@ def bookingConsult():
     elif request.method == 'POST':
         if request.form['cherName']:
             cherName = request.form.get('cherName')
-            return render_template("booking-consult.html", email=True, cherName = cherName)
+            testTeo = [["9:00am","10:20am"],["10:00am","10:20am"],["1:00pm","10:20am"]]
+            return render_template("booking-consult.html", email=True, cherName = cherName, test_arr = test_arr)
         elif request.form['Bookings']:
             # YH do yr thing
             return redirect(url_for('bookingConsult'))
