@@ -33,6 +33,16 @@ function timeConvertor(time) {
     return time
 }
 
+var selectDuration = document.getElementById('slotDuration')
+var selectStart = document.getElementById('startTime')
+setMinEnd()
+selectStart.addEventListener('change', function(event) {
+    setMinEnd()
+});
+selectDuration.addEventListener('click', function(event) {
+    setMinEnd()
+});
+
 function setMinEnd() {
     if (selectStart.value != "") {
         var minEnd = timeConvertor(selectStart.value);
@@ -48,18 +58,11 @@ function setMinEnd() {
             }
         }
         pickerEnd.set('minTime', minEnd);
+        if (timeConvertor(document.getElementById('startTime').value) > minEnd) {
+            pickerEnd.set(minEnd);
+        }
     }
 }
-
-var selectDuration = document.getElementById('slotDuration')
-var selectStart = document.getElementById('startTime')
-setMinEnd()
-selectStart.addEventListener('change', function(event) {
-    setMinEnd()
-});
-selectDuration.addEventListener('click', function(event) {
-    setMinEnd()
-});
 
 var addConfigHTML = `
 <div class="field">
@@ -83,7 +86,7 @@ var addConfigHTML = `
 <div class="field">
     <label class="label">Duration of Slots</label>
     <div class="select">
-        <select>
+        <select class="customSlotDuration">
             <option value="">Select Duration</option>
             <option value="5">5min</option>
             <option value="10">10min</option>
@@ -96,7 +99,9 @@ var addConfigHTML = `
 `;
 
 var addConfig = document.querySelector('.button.is-primary');
-
+var pickerCustomDateRanges = [];
+var pickerCustomStarts = [];
+var pickerCustomEnds = [];
 addConfig.addEventListener('click', function(event) {
     document.getElementById("addConfigField").insertAdjacentHTML("afterend", addConfigHTML);
     let pickerCustomDateRange =  flatpickr(".customDate", {
@@ -118,7 +123,48 @@ addConfig.addEventListener('click', function(event) {
         minTime: "00:00",
         defaultDate: "23:00"
     });
+    pickerCustomDateRanges.push(pickerCustomDateRange);
+    pickerCustomStarts.push(pickerCustomStart);
+    pickerCustomEnds.push(pickerCustomEnd);
+    console.log(document.getElementsByClassName('customStartTime'));
+    checkTiming();
 });
+function checkTiming() {
+    var selectCustomDurations = document.getElementsByClassName('customSlotDuration');
+    var selectCustomStarts = document.getElementsByClassName('customStartTime');
+    setCustomMinEnd()
+    for (var i = 0; i <= selectCustomDurations.length - 1; i++) {
+        selectCustomDurations[i].addEventListener('change', function(event) {
+            console.log(i)
+            setCustomMinEnd(i)
+        });
+        selectCustomStarts[i].addEventListener('click', function(event) {
+            setCustomMinEnd(i)
+        });
+    }
+}
+
+function setCustomMinEnd(i) {
+    console.log(i)
+    if (selectCustomStarts[i].value != "") {
+        var minCustomEnd = timeConvertor(selectCustomStarts[i].value);
+        if (selectCustomDurations[i].value != "") {
+            var minCustomEnd = timeConvertor(selectCustomStarts[i].value);
+            var customMins = parseInt(selectCustomDurations[i].value) + parseInt(minCustomEnd.slice(3,5))
+            if (customMins >= 60) {
+                var customHrs = (customMins - (customMins % 60)) / 60
+                var minCustomEnd = String(parseInt(minCustomEnd.slice(0,3)) + customHrs) + String(customMins - 60)
+            } else {
+                var minCustomEnd = minCustomEnd.slice(0,3) + String(customMins)
+                console.log(minCustomEnd)
+            }
+        }
+        pickerCustomEnds[i].set('minTime', minCustomEnd);
+    }
+}
+
+
+
 
 var createBooking = document.querySelector('.button.is-link');
 var customBookingData = []
