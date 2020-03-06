@@ -51,15 +51,16 @@ function setMinEnd() {
             var mins = parseInt(selectDuration.value) + parseInt(minEnd.slice(3,5))
             if (mins >= 60) {
                 var hrs = (mins - (mins % 60)) / 60
-                var minEnd = String(parseInt(minEnd.slice(0,3)) + hrs) + String(mins - 60)
+                var minEnd = String(parseInt(minEnd.split(':')[0]) + hrs) + ':' + String(mins - 60)
             } else {
-                var minEnd = minEnd.slice(0,3) + String(mins)
+                var minEnd = minEnd.split(':')[0] + ':' + String(mins)
                 console.log(minEnd)
             }
         }
         pickerEnd.set('minTime', minEnd);
         if (timeConvertor(document.getElementById('startTime').value) > minEnd) {
-            pickerEnd.set(minEnd);
+            console.log("ha")
+            pickerEnd.setDate(minEnd);
         }
     }
 }
@@ -127,9 +128,9 @@ addConfig.addEventListener('click', function(event) {
     pickerCustomStarts.push(pickerCustomStart);
     pickerCustomEnds.push(pickerCustomEnd);
     console.log(document.getElementsByClassName('customStartTime'));
-    checkTiming();
+    // checkTiming();
 });
-function checkTiming() {
+/* function checkTiming() {
     var selectCustomDurations = document.getElementsByClassName('customSlotDuration');
     var selectCustomStarts = document.getElementsByClassName('customStartTime');
     setCustomMinEnd()
@@ -161,7 +162,7 @@ function setCustomMinEnd(i) {
         }
         pickerCustomEnds[i].set('minTime', minCustomEnd);
     }
-}
+} */
 
 
 
