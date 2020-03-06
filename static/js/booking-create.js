@@ -56,19 +56,9 @@ var addConfigHTML = `
 var addConfig = document.querySelector('.button.is-primary');
 
 addConfig.addEventListener('click', function(event) {
-    var range = document.getElementById('dateRange').value
-    if (range != "" && range.length == 10) { // one day only
-        var startDate = range;
-        var endDate = range;
-    } else if (range != "") {
-        var startDate = range.split(" to ")[0];
-        var endDate = range.split(" to ")[1];
-    }
     document.getElementById("addConfigField").insertAdjacentHTML("afterend", addConfigHTML);
     flatpickr(".customDate", {
         weekNumbers: true,
-        minDate: startDate,
-        maxDate: endDate,
         altInput: true,
         altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
         dateFormat: "Y-m-d"
