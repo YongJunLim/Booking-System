@@ -17,14 +17,14 @@ let pickerEnd = flatpickr("#endTime", {
     noCalendar: true,
     dateFormat: "h:i K",
     minTime: "00:00",
-    defaultDate: "00:00"
+    defaultDate: "23:00"
 });
 
 function timeConvertor(time) {
     var PM = time.match('PM') ? true : false
     time = time.split(':')
     var min = time[1].slice(0,2)
-    if (PM) {
+    if (PM && time[0] != 12) {
         var hour = 12 + parseInt(time[0],10)
     } else {
         var hour = time[0]
@@ -57,7 +57,6 @@ setMinEnd()
 selectStart.addEventListener('change', function(event) {
     setMinEnd()
 });
-
 selectDuration.addEventListener('click', function(event) {
     setMinEnd()
 });
@@ -100,23 +99,24 @@ var addConfig = document.querySelector('.button.is-primary');
 
 addConfig.addEventListener('click', function(event) {
     document.getElementById("addConfigField").insertAdjacentHTML("afterend", addConfigHTML);
-    flatpickr(".customDate", {
+    let pickerCustomDateRange =  flatpickr(".customDate", {
         weekNumbers: true,
         altInput: true,
         altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
         dateFormat: "Y-m-d"
     });
-
-    flatpickr(".customStartTime", {
+    let pickerCustomStart = flatpickr(".customStartTime", {
         enableTime: true,
         noCalendar: true,
         dateFormat: "h:i K",
+        defaultDate: "12:00"
     });
-
-    flatpickr(".customEndTime", {
+    let pickerCustomEnd = flatpickr(".customEndTime", {
         enableTime: true,
         noCalendar: true,
         dateFormat: "h:i K",
+        minTime: "00:00",
+        defaultDate: "23:00"
     });
 });
 
