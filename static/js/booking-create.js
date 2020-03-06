@@ -1,4 +1,4 @@
-flatpickr("#dateRange", {
+let pickerDateRange = flatpickr("#dateRange", {
     mode: "range",
     minDate: "today",
     weekNumbers: true,
@@ -6,17 +6,60 @@ flatpickr("#dateRange", {
     altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
     dateFormat: "Y-m-d"
 });
-
-flatpickr("#startTime", {
+let pickerStart = flatpickr("#startTime", {
     enableTime: true,
     noCalendar: true,
     dateFormat: "h:i K",
+    defaultDate: "12:00"
+});
+let pickerEnd = flatpickr("#endTime", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "h:i K",
+    minTime: "00:00",
+    defaultDate: "00:00"
 });
 
-flatpickr("#endTime", {
-    enableTime: true,
-    noCalendar: true,
-    dateFormat: "h:i K",
+function timeConvertor(time) {
+    var PM = time.match('PM') ? true : false
+    time = time.split(':')
+    var min = time[1].slice(0,2)
+    if (PM) {
+        var hour = 12 + parseInt(time[0],10)
+    } else {
+        var hour = time[0]
+    }
+    var time = hour + ':' + min
+    return time
+}
+
+function setMinEnd() {
+    if (selectStart.value != "") {
+        var minEnd = timeConvertor(selectStart.value);
+        if (selectDuration.value != "") {
+            var minEnd = timeConvertor(selectStart.value);
+            var mins = parseInt(selectDuration.value) + parseInt(minEnd.slice(3,5))
+            if (mins >= 60) {
+                var hrs = (mins - (mins % 60)) / 60
+                var minEnd = String(parseInt(minEnd.slice(0,3)) + hrs) + String(mins - 60)
+            } else {
+                var minEnd = minEnd.slice(0,3) + String(mins)
+                console.log(minEnd)
+            }
+        }
+        pickerEnd.set('minTime', minEnd);
+    }
+}
+
+var selectDuration = document.getElementById('slotDuration')
+var selectStart = document.getElementById('startTime')
+setMinEnd()
+selectStart.addEventListener('change', function(event) {
+    setMinEnd()
+});
+
+selectDuration.addEventListener('click', function(event) {
+    setMinEnd()
 });
 
 var addConfigHTML = `
@@ -87,7 +130,7 @@ createBooking.addEventListener('click', function(event) {
     details.push(document.getElementById('dateRange').value);
     details.push(document.getElementById('startTime').value);
     details.push(document.getElementById('endTime').value);
-    details.push(document.getElementsByTagName('select')[0].selectedOptions[0].label);
+    details.push(document.getElementById('slotDuration').selectedOptions[0].label);
     customBookingData.push(details);
     var customLength = document.getElementsByClassName('customDate flatpickr-input').length - 1;
     for (let i = 0; i <= customLength; i++) {
