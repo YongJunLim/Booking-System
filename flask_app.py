@@ -35,13 +35,27 @@ def bookingConsult():
     if request.method == 'GET':
         return render_template('booking-consult.html',email=True)
     elif request.method == 'POST':
-        if request.form['cherName']:
-            cherName = request.form.get('cherName')
-            testTeo = [["9:00am","10:20am"],["10:00am","10:20am"],["1:00pm","10:20am"]]
-            return render_template("booking-consult.html", email=True, cherName = cherName, test_arr = test_arr)
-        elif request.form['Bookings']:
+        cherName = request.form.get('cherName')
+        bookings = request.form.get("Bookings")
+        #if request.form['cherName']:
+        if cherName is not None:
+            # --- test data for dates ---
+            dates = ["2020-03-02", "2020-03-06",
+                     "08:00 AM", "04:00 PM", "30min"]
+            # --- booked dates ---
+            bookedSlots = [["2020-03-02", "08:00 AM"],
+                           ["2020-03-02", "09:00 AM"], ["2020-03-03", "11:00 AM"], ["2020-03-03", "03:00 PM"]]
+            return render_template("booking-consult.html", email=True, cherName=cherName, dates=dates ,bookedSlots=bookedSlots)
+        elif bookings is not None:
+            return bookings
             # YH do yr thing
             return redirect(url_for('bookingConsult'))
+
+@app.route('/booking-update', methods = ["POST"])
+def bookingUpdate():
+    bookings = request.form.get("Bookings")
+    return bookings
+
 
 @app.route('/create', methods=['POST', 'GET'])
 def bookingCreate():
@@ -62,3 +76,8 @@ def bookingCreate():
         # create_event(array_2d, ref_code)
 
         return redirect(url_for('bookingCreate'))
+
+if __name__=="__main__":
+    app.run()
+
+    
