@@ -5,6 +5,7 @@
 href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <link rel="stylesheet" type="text/css"
 href="{{ url_for('static', filename='css/booking-consult.css') }}">
+
 {% endblock %}
 
 {% block body %}
@@ -15,11 +16,7 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
 <section class="section is-centered">
     <div class="container">
         {{ test_arr }}
-        <div class="field">
-            <div class="control">
-                <input class="input" id="dateConsult" type="text">
-            </div>
-        </div>
+        
         <div class="field is-grouped is-grouped-centered">
             <div class="tags">
                 <span class="tag">Available</span>
@@ -37,59 +34,43 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
         </div>
 
         {% if cherName %}
-        <div class="field">
-            <h1 id="teacher" class="has-text-weight-bold has-text-centered is-size-3">{{ cherName }}</h1>
-            <table id="consultation-booking" class="table is-bordered is-fullwidth">
-                <tbody>
-                    <tr>
-                        <td id="1" class="has-text-weight-bold has-text-centered">7:00am - 10:20am</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="2" class="has-text-weight-bold has-text-centered">8:00am - 10:20am</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="3" class="has-text-weight-bold has-text-centered">9:00am - 10:20am</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="4" class="has-text-weight-bold has-text-centered">10:00am - 10:20am</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="5" class="has-text-weight-bold has-text-centered">11:00am - 10:20am</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="6" class="has-text-weight-bold has-text-centered">12:00am - 10:20am</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="7" class="has-text-weight-bold has-text-centered">1:00pm - 10:20am</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td id="8" class="has-text-weight-bold has-text-centered">2:00pm - 10:20am</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <form action="/booking-consult" method = "POST">
 
-        <div class="field is-grouped is-grouped-centered">
-            <button type="submit" name="Bookings" class="button is-link">
-                Update Booking
-            </button>
-        </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input" id="dateConsult" type="text" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <h1 id="teacher" class="has-text-weight-bold has-text-centered is-size-3">{{ cherName }}</h1>
+                <table id="consultation-booking" class="table is-bordered is-fullwidth">
+                    <tbody id="consultation-tbody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="field is-grouped is-grouped-centered">
+                <button type="submit" name="Bookings" class="button is-link">
+                    Update Booking
+                </button>
+            </div>
+        </form>
+
         {% endif %}
+
 
     </div>
 </section>
 {% endblock %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.3/flatpickr.min.js"></script>
-<script src="{{ url_for('static', filename='js/booking-consult.js') }}"></script>
 {% if cherName %}
+<script src="{{ url_for('static', filename='js/booking-consult.js') }}"></script>
+<script>
+    var strDates = "{{dates}}";
+
+    generateTimings("{{dates}}");
+    bookedSlots = formatSlots("{{bookedSlots}}");
+</script>
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endif %}
 {% endblock %}
