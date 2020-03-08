@@ -1,13 +1,41 @@
 var update = document.querySelector('button.is-link');
 var table = document.getElementById('consultation-booking');
+var dateConsult = document.getElementById('dateConsult');
 var selects = [];
+var testArr = [];
 
 var ID = function () {
   return '_' + Math.random().toString(36).substr(2, 6);
 };
 
+// --- Code for checking which dates are booked ---
+
+var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        if (mutation.type == "attributes") {
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                table.rows[i].cells[1].className = '';
+            }
+            arr = bookedSlots[dateConsult.value];
+            for (j in arr){
+                for (var i = 0, row; row = table.rows[i]; i++){
+                    if (arr[j] == table.rows[i].cells[0].textContent.split(' - ')[0])
+                        table.rows[i].cells[1].className = 'is-booked';
+                }
+            }
+        }
+    });
+});
+
+observer.observe(dateConsult, {
+    attributes: true //configure it to listen to attribute changes
+});
+
+// --- Code for updating bookings ---
+
 update.addEventListener('click', function(event) {
     update.classList.add('is-loading');
+    selects.push(dateConsult.value);
     for (var i = 0, row; row = table.rows[i]; i++) {
     // iterate through rows
     // rows would be accessed using the "row" variable assigned in the for loop
@@ -15,10 +43,11 @@ update.addEventListener('click', function(event) {
             selects.push(table.rows[i].cells[0].textContent.split(" - "));
         }
     }
-    console.log(selects);
-    document.querySelector('.button.is-link').value = selects;
-    alert(JSON.stringify(selects));
+    document.getElementsByName("Bookings")[0].value = JSON.stringify(selects);
+    //alert(JSON.stringify(selects));
 });
+
+
 
 for (var i = 0, row; row = table.rows[i]; i++) {
     // iterate through rows
@@ -38,14 +67,15 @@ for (var i = 0, row; row = table.rows[i]; i++) {
     }
 }
 
+
 function bookSlot(tableCell) {
     for (var i = 0; i < table.rows.length; i++) {
         // if other cells in same col except itself is booked - so that can still cancel a booked slot
         if (tableCell.className == 'is-booked') {
-            tableCell.classList.replace('is-booked','is-cancelled');
+            tableCell.classList.replace('is-booked', 'is-cancelled');
             return;
         } else if (tableCell.className == 'is-cancelled') {
-            tableCell.classList.replace('is-cancelled','is-booked');
+            tableCell.classList.replace('is-cancelled', 'is-booked');
             return;
         }
     }
@@ -55,6 +85,18 @@ function bookSlot(tableCell) {
 function alrBooked(tableCell) {
     alert("Slot already booked.");
 }
+
+// --- Set min and max date for date picker ---
+
+flatpickr("#dateConsult", {
+    mode: "single",
+    minDate: startDate,
+    maxDate: endDate,
+    weekNumbers: true,
+    altInput: true,
+    altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
+    dateFormat: "Y-m-d"
+});
 
 /*
 function bookConflict(tableCell) {
