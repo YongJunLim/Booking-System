@@ -67,10 +67,9 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
 {% if cherName %}
 <script src="{{ url_for('static', filename='js/booking-consult.js') }}"></script>
 <script>
-    var strDates = "{{dates}}";
-
-    generateTimings("{{dates}}");
+    generateTimings("{{timeRange}}");
     bookedSlots = formatSlots("{{bookedSlots}}");
+    blocked = formatSlots("{{blocked}}");
 </script>
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endif %}
