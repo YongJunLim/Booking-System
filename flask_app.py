@@ -36,7 +36,7 @@ def bookingConsult():
         return render_template('booking-consult.html',email=True)
     elif request.method == 'POST':
         cherName = request.form.get('cherName')
-        bookings = request.form.get("Bookings")
+        new_bookings = request.form.get("newBookings")
         #if request.form['cherName']:
         if cherName is not None:
             # --- test data for dates ---
@@ -46,8 +46,9 @@ def bookingConsult():
             bookedSlots = [["2020-03-02", "08:00 AM"],
                            ["2020-03-02", "09:00 AM"], ["2020-03-03", "11:00 AM"], ["2020-03-03", "03:00 PM"]]
             return render_template("booking-consult.html", email=True, cherName=cherName, dates=dates ,bookedSlots=bookedSlots)
-        elif bookings is not None:
-            return bookings
+        elif new_bookings is not None:
+            cancelled_bookings = request.form.get("cancelledBookings")
+            return "New bookings: "+new_bookings+'<br />'+"Cancelled bookings: "+cancelled_bookings
             # YH do yr thing
             return redirect(url_for('bookingConsult'))
 

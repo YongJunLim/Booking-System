@@ -1,7 +1,6 @@
 var update = document.querySelector('button.is-link');
 var table = document.getElementById('consultation-booking');
 var dateConsult = document.getElementById('dateConsult');
-var selects = [];
 var testArr = [];
 
 var ID = function () {
@@ -14,7 +13,8 @@ var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         if (mutation.type == "attributes") {
             for (var i = 0, row; row = table.rows[i]; i++) {
-                table.rows[i].cells[1].className = '';
+                if (table.rows[i].cells[1].className != "is-selected") // if selected - dont touch unless booked
+                    table.rows[i].cells[1].className = '';
             }
             arr = bookedSlots[dateConsult.value];
             for (j in arr){
@@ -34,16 +34,23 @@ observer.observe(dateConsult, {
 // --- Code for updating bookings ---
 
 update.addEventListener('click', function(event) {
+    var newBookings = [];
+    var cancelledBookings = [];
     update.classList.add('is-loading');
-    selects.push(dateConsult.value);
+    newBookings.push(dateConsult.value);
+    cancelledBookings.push(dateConsult.value);
     for (var i = 0, row; row = table.rows[i]; i++) {
     // iterate through rows
     // rows would be accessed using the "row" variable assigned in the for loop
-        if (table.rows[i].cells[1].className == 'is-selected' || table.rows[i].cells[1].className == 'is-booked') {
-            selects.push(table.rows[i].cells[0].textContent.split(" - "));
+        if (table.rows[i].cells[1].className == 'is-selected') {
+            newBookings.push(table.rows[i].cells[0].textContent.split(" - "));
+        }
+        else if (table.rows[i].cells[1].className == 'is-cancelled') {
+            cancelledBookings.push(table.rows[i].cells[0].textContent.split(" - "));
         }
     }
-    document.getElementsByName("Bookings")[0].value = JSON.stringify(selects);
+    document.getElementsByName("newBookings")[0].value = JSON.stringify(newBookings);
+    document.getElementsByName("cancelledBookings")[0].value = JSON.stringify(cancelledBookings);
     //alert(JSON.stringify(selects));
 });
 
