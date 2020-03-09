@@ -1,23 +1,61 @@
+var selectName = document.getElementById('eventName')
+var selectDate = document.getElementById('dateRange')
+var selectStart = document.getElementById('startTime')
+var selectEnd = document.getElementById('endTime')
+var selectDuration = document.getElementById('slotDuration')
+var createBooking = document.getElementsByClassName('button is-link')[0]
+var customLength = document.getElementsByClassName('customDate flatpickr-input').length - 1
+var addConfig = document.querySelector('.button.is-primary');
+
+var pickerCustomDates = [];
+var pickerCustomStarts = [];
+var pickerCustomEnds = [];
+var customBookingData = []
+
 let pickerDateRange = flatpickr("#dateRange", {
     mode: "range",
     minDate: "today",
     weekNumbers: true,
     altInput: true,
     altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
-    dateFormat: "Y-m-d"
+    dateFormat: "Y-m-d",
+    onReady: function() {
+        validate()
+        console.log('working')
+    },
+    onClose: function() {
+        validate()
+        console.log('working')
+    }
 });
 let pickerStart = flatpickr("#startTime", {
     enableTime: true,
     noCalendar: true,
     dateFormat: "h:i K",
-    defaultDate: "12:00"
+    defaultDate: "12:00",
+    onReady: function() {
+        validate()
+        console.log('working')
+    },
+    onClose: function() {
+        validate()
+        console.log('working')
+    }
 });
 let pickerEnd = flatpickr("#endTime", {
     enableTime: true,
     noCalendar: true,
     dateFormat: "h:i K",
     minTime: "00:00",
-    defaultDate: "23:00"
+    defaultDate: "23:00",
+    onReady: function() {
+        validate()
+        console.log('working')
+    },
+    onClose: function() {
+        validate()
+        console.log('working')
+    }
 });
 
 function timeConvertor(time) {
@@ -37,18 +75,12 @@ function timeConvertor(time) {
     return time
 }
 
-var selectName = document.getElementById('eventName')
-var selectDate = document.getElementById('dateRange')
-var selectStart = document.getElementById('startTime')
-var selectEnd = document.getElementById('endTime')
-var selectDuration = document.getElementById('slotDuration')
-
 setEnd()
-selectStart.addEventListener('change', function(event) {
+selectStart.addEventListener('change', function() {
     setEnd()
     validate()
 });
-selectDuration.addEventListener('click', function(event) {
+selectDuration.addEventListener('click', function() {
     setEnd()
     validate()
 });
@@ -70,16 +102,12 @@ function setEnd() {
     }
 }
 
-selectName.addEventListener('change', function(event) {
+selectName.addEventListener('click', function() {
     validate()
 });
-selectDate.addEventListener('change', function(event) {
+selectName.addEventListener('change', function() {
     validate()
 });
-selectEnd.addEventListener('change', function(event) {
-    validate()
-});
-
 
 var addConfigHTML = `
 <div class="field">
@@ -115,11 +143,7 @@ var addConfigHTML = `
 </div>
 `;
 
-var addConfig = document.querySelector('.button.is-primary');
-var pickerCustomDates = [];
-var pickerCustomStarts = [];
-var pickerCustomEnds = [];
-addConfig.addEventListener('click', function(event) {
+addConfig.addEventListener('click', function() {
     document.getElementById("addConfigField").insertAdjacentHTML("afterend", addConfigHTML);
     let pickerCustomDate =  flatpickr(".customDate", {
         weekNumbers: true,
@@ -147,8 +171,7 @@ addConfig.addEventListener('click', function(event) {
     // checkTiming();
 });
 
-var createBooking = document.querySelector('.button.is-link');
-var customBookingData = []
+
 function validate() {
     if (selectName.value == "" || selectDate.value == "" ||
     selectStart.value == "" || selectEnd.value  == "" ||
@@ -156,7 +179,6 @@ function validate() {
         createBooking.disabled = true;
         return false
     }
-    var customLength = document.getElementsByClassName('customDate flatpickr-input').length - 1;
     for (let i = 0; i <= customLength; i++) {
         if (document.getElementsByClassName('customDate flatpickr-input')[i].value == "" ||
         document.getElementsByClassName('customStartTime flatpickr-input')[i].value == "" ||
@@ -170,7 +192,7 @@ function validate() {
     return true
 }
 
-createBooking.addEventListener('click', function(event) {
+createBooking.addEventListener('click', function() {
     createBooking.classList.add('is-loading');
     customBookingData.push(selectName.value);
     var details = []
