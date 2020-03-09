@@ -37,18 +37,23 @@ function timeConvertor(time) {
     return time
 }
 
-var selectDuration = document.getElementById('slotDuration')
+var selectName = document.getElementById('eventName')
+var selectDate = document.getElementById('dateRange')
 var selectStart = document.getElementById('startTime')
 var selectEnd = document.getElementById('endTime')
-setMinEnd()
+var selectDuration = document.getElementById('slotDuration')
+
+setEnd()
 selectStart.addEventListener('change', function(event) {
-    setMinEnd()
+    setEnd()
+    validate()
 });
 selectDuration.addEventListener('click', function(event) {
-    setMinEnd()
+    setEnd()
+    validate()
 });
 
-function setMinEnd() {
+function setEnd() {
     var minEnd = timeConvertor(selectStart.value);
     if (selectDuration.value != "") {
         var mins = parseInt(selectDuration.value) + parseInt(minEnd.slice(3,5))
@@ -64,6 +69,17 @@ function setMinEnd() {
         pickerEnd.setDate(minEnd);
     }
 }
+
+selectName.addEventListener('change', function(event) {
+    validate()
+});
+selectDate.addEventListener('change', function(event) {
+    validate()
+});
+selectEnd.addEventListener('change', function(event) {
+    validate()
+});
+
 
 var addConfigHTML = `
 <div class="field">
@@ -100,12 +116,12 @@ var addConfigHTML = `
 `;
 
 var addConfig = document.querySelector('.button.is-primary');
-var pickerCustomDateRanges = [];
+var pickerCustomDates = [];
 var pickerCustomStarts = [];
 var pickerCustomEnds = [];
 addConfig.addEventListener('click', function(event) {
     document.getElementById("addConfigField").insertAdjacentHTML("afterend", addConfigHTML);
-    let pickerCustomDateRange =  flatpickr(".customDate", {
+    let pickerCustomDates =  flatpickr(".customDate", {
         weekNumbers: true,
         altInput: true,
         altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
@@ -124,12 +140,55 @@ addConfig.addEventListener('click', function(event) {
         minTime: "00:00",
         defaultDate: "23:00"
     });
-    pickerCustomDateRanges.push(pickerCustomDateRange);
+    pickerCustomDates.push(pickerCustomDate);
     pickerCustomStarts.push(pickerCustomStart);
     pickerCustomEnds.push(pickerCustomEnd);
     console.log(document.getElementsByClassName('customStartTime'));
     // checkTiming();
 });
+
+var createBooking = document.querySelector('.button.is-link');
+var customBookingData = []
+function validate() {
+    if (selectName.value == "" || selectDate.value == "" ||
+    selectStart.value == "" || selectEnd.value  == "" ||
+    selectDuration.value == "") {
+        return false
+    }
+    var customLength = document.getElementsByClassName('customDate flatpickr-input').length - 1;
+    for (let i = 0; i <= customLength; i++) {
+        if (document.getElementsByClassName('customDate flatpickr-input')[i].value == "" ||
+        document.getElementsByClassName('customStartTime flatpickr-input')[i].value == "" ||
+        document.getElementsByClassName('customEndTime flatpickr-input')[i].value == "" ||
+        document.getElementsByClassName('customSlotDuration')[0].selectedOptions[0].value == "") {
+            return false
+        }
+    };
+    createBooking.disabled = false;
+    return true
+}
+
+createBooking.addEventListener('click', function(event) {
+    createBooking.classList.add('is-loading');
+    customBookingData.push(selectName.value);
+    var details = []
+    details.push(selectDate.value);
+    details.push(selectStart.value);
+    details.push(selectEnd.value);
+    details.push(selectDuration.selectedOptions[0].label);
+    customBookingData.push(details);
+    for (let i = 0; i <= customLength; i++) {
+        var addConfigArray = [];
+        addConfigArray.push(document.getElementsByClassName('customDate flatpickr-input')[i].value);
+        addConfigArray.push(document.getElementsByClassName('customStartTime flatpickr-input')[i].value);
+        addConfigArray.push(document.getElementsByClassName('customEndTime flatpickr-input')[i].value);
+        addConfigArray.push(document.getElementsByClassName('customSlotDuration')[0].selectedOptions[0].label);
+        customBookingData.push(addConfigArray);
+    };
+    console.log(customBookingData);
+    createBooking.value = JSON.stringify(customBookingData);
+});
+
 /* function checkTiming() {
     var selectCustomDurations = document.getElementsByClassName('customSlotDuration');
     var selectCustomStarts = document.getElementsByClassName('customStartTime');
@@ -163,31 +222,3 @@ function setCustomMinEnd(i) {
         pickerCustomEnds[i].set('minTime', minCustomEnd);
     }
 } */
-
-
-
-
-var createBooking = document.querySelector('.button.is-link');
-var customBookingData = []
-
-createBooking.addEventListener('click', function(event) {
-    createBooking.classList.add('is-loading');
-    customBookingData.push(document.getElementById('eventName').value);
-    var details = []
-    details.push(document.getElementById('dateRange').value);
-    details.push(document.getElementById('startTime').value);
-    details.push(document.getElementById('endTime').value);
-    details.push(document.getElementById('slotDuration').selectedOptions[0].label);
-    customBookingData.push(details);
-    var customLength = document.getElementsByClassName('customDate flatpickr-input').length - 1;
-    for (let i = 0; i <= customLength; i++) {
-        var addConfigArray = [];
-        addConfigArray.push(document.getElementsByClassName('customDate flatpickr-input')[i].value);
-        addConfigArray.push(document.getElementsByClassName('customStartTime flatpickr-input')[i].value);
-        addConfigArray.push(document.getElementsByClassName('customEndTime flatpickr-input')[i].value);
-        addConfigArray.push(document.getElementsByTagName('select')[i+1].selectedOptions[0].label);
-        customBookingData.push(addConfigArray);
-    };
-    console.log(customBookingData);
-    document.querySelector('.button.is-link').value = JSON.stringify(customBookingData);
-});
