@@ -121,7 +121,7 @@ var pickerCustomStarts = [];
 var pickerCustomEnds = [];
 addConfig.addEventListener('click', function(event) {
     document.getElementById("addConfigField").insertAdjacentHTML("afterend", addConfigHTML);
-    let pickerCustomDates =  flatpickr(".customDate", {
+    let pickerCustomDate =  flatpickr(".customDate", {
         weekNumbers: true,
         altInput: true,
         altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
@@ -153,6 +153,7 @@ function validate() {
     if (selectName.value == "" || selectDate.value == "" ||
     selectStart.value == "" || selectEnd.value  == "" ||
     selectDuration.value == "") {
+        createBooking.disabled = true;
         return false
     }
     var customLength = document.getElementsByClassName('customDate flatpickr-input').length - 1;
@@ -161,6 +162,7 @@ function validate() {
         document.getElementsByClassName('customStartTime flatpickr-input')[i].value == "" ||
         document.getElementsByClassName('customEndTime flatpickr-input')[i].value == "" ||
         document.getElementsByClassName('customSlotDuration')[0].selectedOptions[0].value == "") {
+            createBooking.disabled = true;
             return false
         }
     };
