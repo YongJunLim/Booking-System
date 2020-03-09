@@ -21,20 +21,25 @@ let pickerEnd = flatpickr("#endTime", {
 });
 
 function timeConvertor(time) {
-    var PM = time.match('PM') ? true : false
-    time = time.split(':')
-    var min = time[1].slice(0,2)
-    if (PM && time[0] != 12) {
-        var hour = 12 + parseInt(time[0],10)
+    if (time == "12:00 AM") {
+        time = "00:00"
     } else {
-        var hour = time[0]
+        var PM = time.match('PM') ? true : false
+        time = time.split(':')
+        var min = time[1].slice(0,2)
+        if (PM && time[0] != 12) {
+            var hour = 12 + parseInt(time[0],10)
+        } else {
+            var hour = time[0]
+        }
+        var time = hour + ':' + min
     }
-    var time = hour + ':' + min
     return time
 }
 
 var selectDuration = document.getElementById('slotDuration')
 var selectStart = document.getElementById('startTime')
+var selectEnd = document.getElementById('endTime')
 setMinEnd()
 selectStart.addEventListener('change', function(event) {
     setMinEnd()
@@ -44,24 +49,19 @@ selectDuration.addEventListener('click', function(event) {
 });
 
 function setMinEnd() {
-    if (selectStart.value != "") {
-        var minEnd = timeConvertor(selectStart.value);
-        if (selectDuration.value != "") {
-            var minEnd = timeConvertor(selectStart.value);
-            var mins = parseInt(selectDuration.value) + parseInt(minEnd.slice(3,5))
-            if (mins >= 60) {
-                var hrs = (mins - (mins % 60)) / 60
-                var minEnd = String(parseInt(minEnd.split(':')[0]) + hrs) + ':' + String(mins - 60)
-            } else {
-                var minEnd = minEnd.split(':')[0] + ':' + String(mins)
-                console.log(minEnd)
-            }
+    var minEnd = timeConvertor(selectStart.value);
+    if (selectDuration.value != "") {
+        var mins = parseInt(selectDuration.value) + parseInt(minEnd.slice(3,5))
+        if (mins >= 60) {
+            var hrs = (mins - (mins % 60)) / 60
+            var minEnd = String(parseInt(minEnd.split(':')[0]) + hrs) + ':' + String(mins - 60)
+        } else {
+            var minEnd = minEnd.split(':')[0] + ':' + String(mins)
         }
-        pickerEnd.set('minTime', minEnd);
-        if (timeConvertor(document.getElementById('startTime').value) > minEnd) {
-            console.log("ha")
-            pickerEnd.setDate(minEnd);
-        }
+    }
+    pickerEnd.set('minTime', minEnd);
+    if (timeConvertor(selectStart.value) > timeConvertor(selectEnd.value) || minEnd > timeConvertor(selectEnd.value)) {
+        pickerEnd.setDate(minEnd);
     }
 }
 
