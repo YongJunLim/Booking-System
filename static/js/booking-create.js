@@ -6,9 +6,6 @@ var selectDuration = document.getElementById('slotDuration')
 var createBooking = document.getElementsByClassName('button is-link')[0]
 var addConfig = document.querySelector('.button.is-primary');
 
-var pickerCustomDates = [];
-var pickerCustomStarts = [];
-var pickerCustomEnds = [];
 var customBookingData = []
 
 let pickerDateRange = flatpickr("#dateRange", {
@@ -112,19 +109,19 @@ var addConfigHTML = `
 <div class="field">
     <label class="label">Custom Date</label>
     <div class="control">
-        <input class="input customDate" type="text">
+        <input id="customDate" class="input customDate" type="text">
     </div>
 </div>
 <div class="field">
     <label class="label">Start Time</label>
     <div class="control">
-        <input class="input customStartTime" type="text">
+        <input id="customStartTime" class="input customStartTime" type="text">
     </div>
 </div>
 <div class="field">
     <label class="label">End Time</label>
     <div class="control">
-        <input class="input customEndTime" type="text">
+        <input id="customEndTime" class="input customEndTime" type="text">
     </div>
 </div>
 <div class="field">
@@ -144,7 +141,17 @@ var addConfigHTML = `
 
 addConfig.addEventListener('click', function() {
     document.getElementById("addConfigField").insertAdjacentHTML("afterend", addConfigHTML);
-    let pickerCustomDate =  flatpickr(".customDate", {
+    // This particular customLength is counted b4 adding new fields
+    var customLength = document.getElementsByClassName('customDate flatpickr-input').length
+    var customDateIndex = "customDate" + String(customLength)
+    var customStartTimeIndex = "customStartTime" + String(customLength)
+    var customEndTimeIndex = "customEndTime" + String(customLength)
+
+    document.getElementById("customDate").setAttribute("id", customDateIndex);
+    document.getElementById("customStartTime").setAttribute("id", customStartTimeIndex);
+    document.getElementById("customEndTime").setAttribute("id", customEndTimeIndex);
+
+    flatpickr("#"+customDateIndex, {
         weekNumbers: true,
         altInput: true,
         altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
@@ -158,7 +165,7 @@ addConfig.addEventListener('click', function() {
             console.log('working')
         }
     });
-    let pickerCustomStart = flatpickr(".customStartTime", {
+    flatpickr("#"+customStartTimeIndex, {
         enableTime: true,
         noCalendar: true,
         dateFormat: "h:i K",
@@ -172,7 +179,7 @@ addConfig.addEventListener('click', function() {
             console.log('working')
         }
     });
-    let pickerCustomEnd = flatpickr(".customEndTime", {
+    flatpickr("#"+customEndTimeIndex, {
         enableTime: true,
         noCalendar: true,
         dateFormat: "h:i K",
@@ -187,10 +194,44 @@ addConfig.addEventListener('click', function() {
             console.log('working')
         }
     });
-    var newSelectCustomDuration = document.getElementsByClassName('customSlotDuration')[0]
 
+    var newSelectCustomDuration = document.getElementsByClassName('customSlotDuration')[0]
+    var customDurationIndex = "customDuration" + String(document.getElementsByClassName('customSlotDuration').length - 1)
+    newSelectCustomDuration.setAttribute("id", customDurationIndex)
+    setCustomEnd(newSelectCustomDuration.id)
+    newSelectCustomDuration.addEventListener('click', function() {
+        setCustomEnd(newSelectCustomDuration.id)
+        validate()
+    });
+    var newSelectCustomStart = document.getElementsByClassName('customStartTime')[0]
+    newSelectCustomStart.addEventListener('change', function() {
+        setCustomEnd(newSelectCustomStart.id)
+        validate()
+    });
 });
 
+function setCustomEnd(id) {
+    var id = id.replace("customDuration","")
+    var selectCustomStart = document.getElementById('customStartTime'+id)
+    var selectCustomDuration = document.getElementById('customDuration'+id)
+    var selectCustomEnd = document.getElementById('customEndTime'+id)
+    var minCustomEnd = timeConvertor(selectCustomStart.value);
+    if (selectCustomDuration.value != "") {
+        var customMins = parseInt(selectCustomDuration.value) + parseInt(minCustomEnd.slice(3,5))
+        if (customMins >= 60) {
+            var customHrs = (customMins - (customMins % 60)) / 60
+            var minCustomEnd = String(parseInt(minCustomEnd.split(':')[0]) + customHrs) + ':' + String(customMins - 60)
+        } else {
+            var minCustomEnd = minCustomEnd.split(':')[0] + ':' + String(customMins)
+        }
+    }
+    var pickerCustomEnd = document.querySelector("#customEndTime"+id)._flatpickr
+    pickerCustomEnd.set('minTime', minCustomEnd);
+    if (timeConvertor(selectCustomStart.value) > timeConvertor(selectCustomEnd.value) || minCustomEnd > timeConvertor(selectCustomEnd.value)) {
+        pickerCustomEnd.setDate(minCustomEnd);
+    }
+
+}
 
 function validate() {
     if (selectName.value == "" || selectDate.value == "" ||
@@ -199,8 +240,8 @@ function validate() {
         createBooking.disabled = true;
         return false
     }
-    var customLength = document.getElementsByClassName('customDate flatpickr-input').length - 1
-    for (let i = 0; i <= customLength; i++) {
+    var customLength = document.getElementsByClassName('customDate flatpickr-input').length
+    for (let i = 0; i < customLength; i++) {
         if (document.getElementsByClassName('customDate flatpickr-input')[i].value == "" ||
         document.getElementsByClassName('customStartTime flatpickr-input')[i].value == "" ||
         document.getElementsByClassName('customEndTime flatpickr-input')[i].value == "" ||
@@ -222,49 +263,15 @@ createBooking.addEventListener('click', function() {
     details.push(selectEnd.value);
     details.push(selectDuration.selectedOptions[0].label);
     customBookingData.push(details);
-    var customLength = document.getElementsByClassName('customDate flatpickr-input').length - 1
-    for (let i = 0; i <= customLength; i++) {
+    var customLength = document.getElementsByClassName('customDate flatpickr-input').length
+    for (let i = 0; i < customLength; i++) {
         var addConfigArray = [];
         addConfigArray.push(document.getElementsByClassName('customDate flatpickr-input')[i].value);
         addConfigArray.push(document.getElementsByClassName('customStartTime flatpickr-input')[i].value);
         addConfigArray.push(document.getElementsByClassName('customEndTime flatpickr-input')[i].value);
-        addConfigArray.push(document.getElementsByClassName('customSlotDuration')[0].selectedOptions[0].label);
+        addConfigArray.push(document.getElementsByClassName('customSlotDuration')[i].selectedOptions[0].label);
         customBookingData.push(addConfigArray);
     };
     console.log(customBookingData);
     createBooking.value = JSON.stringify(customBookingData);
 });
-
-/* function checkTiming() {
-    var selectCustomDurations = document.getElementsByClassName('customSlotDuration');
-    var selectCustomStarts = document.getElementsByClassName('customStartTime');
-    setCustomMinEnd()
-    for (var i = 0; i <= selectCustomDurations.length - 1; i++) {
-        selectCustomDurations[i].addEventListener('change', function(event) {
-            console.log(i)
-            setCustomMinEnd(i)
-        });
-        selectCustomStarts[i].addEventListener('click', function(event) {
-            setCustomMinEnd(i)
-        });
-    }
-}
-
-function setCustomMinEnd(i) {
-    console.log(i)
-    if (selectCustomStarts[i].value != "") {
-        var minCustomEnd = timeConvertor(selectCustomStarts[i].value);
-        if (selectCustomDurations[i].value != "") {
-            var minCustomEnd = timeConvertor(selectCustomStarts[i].value);
-            var customMins = parseInt(selectCustomDurations[i].value) + parseInt(minCustomEnd.slice(3,5))
-            if (customMins >= 60) {
-                var customHrs = (customMins - (customMins % 60)) / 60
-                var minCustomEnd = String(parseInt(minCustomEnd.slice(0,3)) + customHrs) + String(customMins - 60)
-            } else {
-                var minCustomEnd = minCustomEnd.slice(0,3) + String(customMins)
-                console.log(minCustomEnd)
-            }
-        }
-        pickerCustomEnds[i].set('minTime', minCustomEnd);
-    }
-} */
