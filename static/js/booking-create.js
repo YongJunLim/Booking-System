@@ -230,7 +230,6 @@ function setCustomEnd(id) {
     if (timeConvertor(selectCustomStart.value) > timeConvertor(selectCustomEnd.value) || minCustomEnd > timeConvertor(selectCustomEnd.value)) {
         pickerCustomEnd.setDate(minCustomEnd);
     }
-
 }
 
 function validate() {
