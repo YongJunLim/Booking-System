@@ -50,7 +50,8 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
                 </table>
             </div>
             <div class="field is-grouped is-grouped-centered">
-                <button type="submit" name="Bookings" class="button is-link">
+                <input name="cancelledBookings" type="hidden">
+                <button type="submit" name="newBookings" class="button is-link">
                     Update Booking
                 </button>
             </div>
@@ -66,10 +67,9 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
 {% if cherName %}
 <script src="{{ url_for('static', filename='js/booking-consult.js') }}"></script>
 <script>
-    var strDates = "{{dates}}";
-
-    generateTimings("{{dates}}");
+    generateTimings("{{timeRange}}");
     bookedSlots = formatSlots("{{bookedSlots}}");
+    blocked = formatSlots("{{blocked}}");
 </script>
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endif %}
