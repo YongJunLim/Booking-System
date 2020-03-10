@@ -187,6 +187,7 @@ addConfig.addEventListener('click', function() {
             console.log('working')
         }
     });
+    var newSelectCustomDuration = document.getElementsByClassName('customSlotDuration')[0]
 
 });
 
@@ -203,7 +204,7 @@ function validate() {
         if (document.getElementsByClassName('customDate flatpickr-input')[i].value == "" ||
         document.getElementsByClassName('customStartTime flatpickr-input')[i].value == "" ||
         document.getElementsByClassName('customEndTime flatpickr-input')[i].value == "" ||
-        document.getElementsByClassName('customSlotDuration')[0].selectedOptions[0].value == "") {
+        document.getElementsByClassName('customSlotDuration')[i].selectedOptions[0].value == "") {
             createBooking.disabled = true;
             return false
         }

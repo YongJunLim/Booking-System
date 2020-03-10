@@ -62,6 +62,11 @@ def bookingCreate():
     if request.method == 'GET':
         return render_template('booking-create.html',email=True)
     elif request.method == 'POST':
+        if '""' in request.form['create-booking'] \
+        or 'Select Duration' in request.form['create-booking']:
+            # some fields not selected
+            error = 'Error with booking. Please try again.'
+            return render_template('booking-create.html',email=True, error=error)
 
         ref_code = "Biku"
         # Replace placeholder
@@ -80,4 +85,4 @@ def bookingCreate():
 if __name__=="__main__":
     app.run()
 
-    
+
