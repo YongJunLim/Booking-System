@@ -35,32 +35,7 @@ var observer = new MutationObserver(function (mutations) {
                 }
             }
             
-            // update event listeners based on blocked or not -- blocked listener not working --
-            if (attached) {
-                for (var i = 0, row; row = table.rows[i]; i++) {
-                    for (var j = 1, col; col = row.cells[j]; j++) {
-                        table.rows[i].cells[j].removeEventListener('click', await);
-                    }
-                }
-            }
-            for (var i = 0, row; row = table.rows[i]; i++) {
-                // iterate through rows
-                // rows would be accessed using the "row" variable assigned in the for loop
-                for (var j = 1, col; col = row.cells[j]; j++) { // i = 1 instead of 0 to not count the first col aka timings
-                    // iterate through columns
-                    // columns would be accessed using the "col" variable assigned in the for loop
-                    if (table.rows[i].cells[j].classList.contains('is-blocked')) {
-                        table.rows[i].cells[j].addEventListener('click', function await(event) {
-                            alrBooked(this);
-                        })
-                    } else {
-                        table.rows[i].cells[j].addEventListener('click', function await(event) {
-                            bookSlot(this);
-                        })
-                    }
-                }
-            }
-            attached = true;
+            
         }
     });
 });
@@ -92,7 +67,17 @@ update.addEventListener('click', function(event) {
     //alert(JSON.stringify(selects));
 });
 
-
+for (var i = 0, row; row = table.rows[i]; i++) {
+    // iterate through rows
+    // rows would be accessed using the "row" variable assigned in the for loop
+    for (var j = 1, col; col = row.cells[j]; j++) { // i = 1 instead of 0 to not count the first col aka timings
+        // iterate through columns
+        // columns would be accessed using the "col" variable assigned in the for loop
+        table.rows[i].cells[j].addEventListener('click', function (event) {
+            bookSlot(this);
+        })
+    }
+}
 
 function bookSlot(tableCell) {
     for (var i = 0; i < table.rows.length; i++) {
@@ -105,12 +90,12 @@ function bookSlot(tableCell) {
             return;
         }
     }
-    if (!tableCell.classList.contains('is-blocked'))
+    if (tableCell.classList.contains('is-blocked')){
+        alert("Slot already booked.");
+    }
+    else {
         tableCell.classList.toggle('is-selected');
-}
-
-function alrBooked(tableCell) {
-    alert("Slot already booked.");
+    }
 }
 
 // --- Set min and max date for date picker ---
