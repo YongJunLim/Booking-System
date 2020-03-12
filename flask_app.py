@@ -42,13 +42,15 @@ def bookingConsult():
             # --- test data for dates ---
             time_range = ["2020-03-02", "2020-03-06",
                      "08:00 AM", "04:00 PM", "30min"]
+            time_ranges = [["2020-03-02", "2020-03-06", "08:00 AM", "04:00 PM",
+                            "30min"], ["2020-03-08", "2020-03-11", "09:00 AM", "03:00 PM", "30min"]]
             # --- booked dates ---
             bookedSlots = [["2020-03-02", "08:00 AM"],
-                           ["2020-03-02", "09:00 AM"], ["2020-03-03", "11:00 AM"], ["2020-03-03", "03:00 PM"]]
+                           ["2020-03-02", "09:00 AM"], ["2020-03-03", "11:00 AM"], ["2020-03-03", "02:00 PM"]]
             blocked = [["2020-03-04", "08:00 AM"],
-                          ["2020-03-04", "09:00 AM"], ["2020-03-05", "11:00 AM"], ["2020-03-05", "03:00 PM"]]
+                          ["2020-03-04", "09:00 AM"], ["2020-03-05", "11:00 AM"], ["2020-03-05", "02:00 PM"]]
             return render_template("booking-consult.html", email=True, cherName=cherName,
-                                    timeRange=time_range, bookedSlots=bookedSlots, blocked=blocked)
+                                   timeRange=time_range, bookedSlots=bookedSlots, blocked=blocked, timeRanges=time_ranges)
         elif new_bookings is not None:
             cancelled_bookings = request.form.get("cancelledBookings")
             return "New bookings: "+new_bookings+'<br />'+"Cancelled bookings: "+cancelled_bookings
