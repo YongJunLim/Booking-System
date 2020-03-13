@@ -76,12 +76,11 @@
 					<div class="navbar-item level">
 						<div class="level-left has-text-centered">
 							<div class="has-text-weight-bold level-item">
-								LONG USERNAME
+								{{ name }}
 							</div>
 							<div class="level-item">
 								<figure class="image">
-									<img id="user-icon" class="is-rounded" src="
-									{{ url_for('static', filename='img/user_icon.png') }}">
+									<img id="user-icon" class="is-rounded" src={{ picture }}>
 								</figure>
 							</div>
 						</div>
