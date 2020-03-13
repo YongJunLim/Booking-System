@@ -14,27 +14,51 @@ var ID = function () {
 var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         if (mutation.type == "attributes") {
-
-            // reset all slots
-            for (var i = 0, row; row = table.rows[i]; i++) {
-                if (table.rows[i].cells[1].className != "is-selected") // if selected - dont touch
-                    table.rows[i].cells[1].className = '';
-            }
-
-            // set slots to booked or blocked
-            var bookedTimings = bookedSlots[dateConsult.value];
-            var blockedTimings = blocked[dateConsult.value];
-            for (var i = 0, row; row = table.rows[i]; i++) {
-                for (j in bookedTimings) {
-                    if (bookedTimings[j] == table.rows[i].cells[0].textContent.split(' - ')[0])
-                        table.rows[i].cells[1].className = 'is-booked';
+            // configs = [dateConfigs, timingConfigs], bookedSlots, blocked are global variables from booking-consult.html
+            timeRange = findDate(configs[0], configs[1], dateConsult.value);
+            if(dateConsult.value!=''){
+                if(timeRange==-1){
+                    alert("Date not within range!");
+                    var tbody = document.getElementById("consultation-tbody");
+                    if (tbody) tbody.remove();
+                    var submit = document.getElementsByClassName("button is-link")[0];
+                    if (submit) submit.style="display: none;";
                 }
-                for (j in blockedTimings) {
-                    if (blockedTimings[j] == table.rows[i].cells[0].textContent.split(' - ')[0])
-                        table.rows[i].cells[1].className = 'is-blocked';
+                else{
+                    var submit = document.getElementsByClassName("button is-link")[0];
+                    if (submit) submit.style = "";
+                    generateTimings(timeRange);
+                    // reset all slots
+                    for (var i = 0, row; row = table.rows[i]; i++) table.rows[i].cells[1].className = '';
+
+                    // set slots to booked or blocked
+                    var bookedTimings = bookedSlots[dateConsult.value];
+                    var blockedTimings = blocked[dateConsult.value];
+                    for (var i = 0, row; row = table.rows[i]; i++) {
+                        for (j in bookedTimings) {
+                            if (bookedTimings[j] == table.rows[i].cells[0].textContent.split(' - ')[0])
+                                table.rows[i].cells[1].className = 'is-booked';
+                        }
+                        for (j in blockedTimings) {
+                            if (blockedTimings[j] == table.rows[i].cells[0].textContent.split(' - ')[0])
+                                table.rows[i].cells[1].className = 'is-blocked';
+                        }
+                    }
+
+                    for (var i = 0, row; row = table.rows[i]; i++) {
+                        // iterate through rows
+                        // rows would be accessed using the "row" variable assigned in the for loop
+                        for (var j = 1, col; col = row.cells[j]; j++) { // i = 1 instead of 0 to not count the first col aka timings
+                            // iterate through columns
+                            // columns would be accessed using the "col" variable assigned in the for loop
+                            table.rows[i].cells[j].addEventListener('click', function (event) {
+                                bookSlot(this);
+                            })
+                        }
+                    }
+                    // End of else block
                 }
             }
-            
             
         }
     });
@@ -67,18 +91,6 @@ update.addEventListener('click', function(event) {
     //alert(JSON.stringify(selects));
 });
 
-for (var i = 0, row; row = table.rows[i]; i++) {
-    // iterate through rows
-    // rows would be accessed using the "row" variable assigned in the for loop
-    for (var j = 1, col; col = row.cells[j]; j++) { // i = 1 instead of 0 to not count the first col aka timings
-        // iterate through columns
-        // columns would be accessed using the "col" variable assigned in the for loop
-        table.rows[i].cells[j].addEventListener('click', function (event) {
-            bookSlot(this);
-        })
-    }
-}
-
 function bookSlot(tableCell) {
     for (var i = 0; i < table.rows.length; i++) {
         // if other cells in same col except itself is booked - so that can still cancel a booked slot
@@ -102,8 +114,6 @@ function bookSlot(tableCell) {
 
 flatpickr("#dateConsult", {
     mode: "single",
-    minDate: startDate,
-    maxDate: endDate,
     weekNumbers: true,
     altInput: true,
     altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
