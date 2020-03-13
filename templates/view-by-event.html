@@ -9,11 +9,11 @@
     <div class="container">
 
         <label>Display by: </label>
-        <form style="display: inline;" action="/homepage">
+        <form style="display: inline;" action="/sort_by_time">
             <input type="submit" value="Time">
         </form>
         <h1 class="title">Upcoming Consultations</h1>
-        
+
         <table class="table is-fullwidth is-hoverable">
             <thead>
             </thead>
@@ -70,7 +70,7 @@
             </tbody>
         </table>
     </div>
-        
+
     {% for i in range(consults | length) %}
     {% for j in range(consults[i] | length) %}
     <div id="modal_consult_{{i+1}}_{{j+1}}" class="modal">
@@ -154,7 +154,7 @@
     </div>
     {% endfor %}
     {% endfor %}
-        
+
 
 </section>
 {% endblock %}

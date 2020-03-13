@@ -30,7 +30,8 @@ def view_by_time():
     with open("./test-data/specials_time.json") as f:
         specials = json.load(f)
 
-    return render_template('view-by-time.html', email=email, picture=picture, name=name, consults = consults, specials = specials)
+    return render_template('view-by-time.html', email=email, picture=picture,
+    name=name, consults = consults, specials = specials)
 
 
 @app.route('/sort_by_event')
@@ -42,7 +43,8 @@ def view_by_event():
     with open("./test-data/specials_event.json") as f:
         specials = json.load(f)
 
-    return render_template('view-by-event.html', email=email, picture=picture, name=name, consults=consults, specials=specials)
+    return render_template('view-by-event.html', email=email, picture=picture,
+    name=name, consults=consults, specials=specials)
 
 @app.route('/booking-consult', methods=["GET", "POST"])
 def bookingConsult():
@@ -50,7 +52,8 @@ def bookingConsult():
     picture = user_info['picture']
     name = user_info['name']
     if request.method == 'GET':
-        return render_template('booking-consult.html',email=email, picture=picture, name=name)
+        return render_template('booking-consult.html',email=email,
+        picture=picture, name=name)
     elif request.method == 'POST':
         cherName = request.form.get('cherName')
         new_bookings = request.form.get("newBookings")
@@ -66,8 +69,9 @@ def bookingConsult():
                            ["2020-03-02", "09:00 AM"], ["2020-03-03", "11:00 AM"], ["2020-03-03", "02:00 PM"]]
             blocked = [["2020-03-04", "08:00 AM"],
                           ["2020-03-04", "09:00 AM"], ["2020-03-05", "11:00 AM"], ["2020-03-05", "02:00 PM"]]
-            return render_template("booking-consult.html", email=email, picture=picture, name=name, cherName=cherName,
-            timeRange=time_range, bookedSlots=bookedSlots, blocked=blocked, timeRanges=time_ranges)
+            return render_template("booking-consult.html", email=email,
+            picture=picture, name=name, cherName=cherName,timeRange=time_range,
+            bookedSlots=bookedSlots, blocked=blocked, timeRanges=time_ranges)
         elif new_bookings is not None:
             cancelled_bookings = request.form.get("cancelledBookings")
             return "New bookings: "+new_bookings+'<br />'+"Cancelled bookings: "+cancelled_bookings

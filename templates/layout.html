@@ -28,7 +28,8 @@
 			<div class="navbar-brand">
 				<span id="nav-title" class="navbar-item">
 					<img id="nav-icon" src="
-					{{ url_for('static', filename='img/BBCS_Logo.png') }}">
+					{{ url_for('static', filename='img/BBCS_Logo.png') }}"
+					height="24" width="24">
 					BuildingBloCS Booking System
 				</span>
 				<span class="navbar-burger burger" data-target="navMenu">
@@ -66,11 +67,11 @@
 						Help
 					</a>
 					{% if not email %}
-					<a href="/homepage" class="navbar-item">
+					<a href="/google/login" class="navbar-item">
 						Sign in
 					</a>
 					{% else %}
-					<a href="/" class="navbar-item">
+					<a href="/google/logout" class="navbar-item">
 						Sign out
 					</a>
 					<div class="navbar-item level">
