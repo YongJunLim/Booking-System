@@ -257,7 +257,11 @@ createBooking.addEventListener('click', function() {
     createBooking.classList.add('is-loading');
     customBookingData.push(selectName.value);
     var details = []
-    details.push(selectDate.value);
+    if (selectDate.value.length == 10) {
+        details.push(selectDate.value + " to " + selectDate.value);
+    } else {
+        details.push(selectDate.value);
+    }
     details.push(selectStart.value);
     details.push(selectEnd.value);
     details.push(selectDuration.selectedOptions[0].label);
