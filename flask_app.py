@@ -67,7 +67,7 @@ def bookingConsult():
             blocked = [["2020-03-04", "08:00 AM"],
                           ["2020-03-04", "09:00 AM"], ["2020-03-05", "11:00 AM"], ["2020-03-05", "02:00 PM"]]
             return render_template("booking-consult.html", email=email, picture=picture, name=name, cherName=cherName,
-                                   timeRange=time_range, bookedSlots=bookedSlots, blocked=blocked, timeRanges=time_ranges)
+            timeRange=time_range, bookedSlots=bookedSlots, blocked=blocked, timeRanges=time_ranges)
         elif new_bookings is not None:
             cancelled_bookings = request.form.get("cancelledBookings")
             return "New bookings: "+new_bookings+'<br />'+"Cancelled bookings: "+cancelled_bookings
@@ -86,13 +86,15 @@ def bookingCreate():
     picture = user_info['picture']
     name = user_info['name']
     if request.method == 'GET':
-        return render_template('booking-create.html',email=email, picture=picture, name=name)
+        return render_template('booking-create.html', email=email,
+        picture=picture, name=name)
     elif request.method == 'POST':
         if '""' in request.form['create-booking'] \
         or 'Select Duration' in request.form['create-booking']:
             # some fields not selected
             error = 'Error with booking. Please try again.'
-            return render_template('booking-create.html',email=email, picture=picture, name=name, error=error)
+            return render_template('booking-create.html',email=email,
+            picture=picture, name=name, error=error)
 
         ref_code = "Biku"
         # Replace placeholder

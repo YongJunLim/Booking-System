@@ -2,7 +2,7 @@
 <html>
     <head>
         {% block head %}
-		<title>*TEMP* Booking System</title>
+		<title>BuildingBloCS Booking System</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href=
@@ -11,6 +11,8 @@
 		"https://indestructibletype.com/fonts/Jost.css">
 		<link rel="stylesheet" type="text/css" href=
 		"{{ url_for('static', filename='css/layout.css') }}">
+		<link rel="icon" type="image/png" href=
+		"{{ url_for('static', filename='img/favicon.png') }}">
 		<!--
 		<link rel="icon" type="image/png" sizes="32x32" href=
 		"{{ url_for('static', filename='img/favicon-32x32.png') }}">
@@ -25,11 +27,9 @@
 		<nav class="navbar is-info">
 			<div class="navbar-brand">
 				<span id="nav-title" class="navbar-item">
-					<!--
 					<img id="nav-icon" src="
-					{{ url_for('static', filename='img/dhs_logo.svg') }}">
-						-->
-					*TEMP* Booking System
+					{{ url_for('static', filename='img/BBCS_Logo.png') }}">
+					BuildingBloCS Booking System
 				</span>
 				<span class="navbar-burger burger" data-target="navMenu">
 					<span></span>

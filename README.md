@@ -1,3 +1,3 @@
 # Booking System
 
-Proof of concept for DHS/BuildingBloCS
+To be used for BuildingBloCS 2020
