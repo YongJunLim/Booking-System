@@ -46,6 +46,7 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
                 <h1 id="teacher" class="has-text-weight-bold has-text-centered is-size-3">{{ cherName }}</h1>
                 <table id="consultation-booking" class="table is-bordered is-fullwidth">
                     <tbody id="consultation-tbody">
+                        
                     </tbody>
                 </table>
             </div>
@@ -67,7 +68,8 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
 {% if cherName %}
 <script src="{{ url_for('static', filename='js/booking-consult.js') }}"></script>
 <script>
-    generateTimings("{{timeRange}}");
+    // Global variables to be passed into dashboard.js
+    configs = processTimings("{{timeRanges}}");
     bookedSlots = formatSlots("{{bookedSlots}}");
     blocked = formatSlots("{{blocked}}");
 </script>
