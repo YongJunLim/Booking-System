@@ -285,7 +285,13 @@ createBooking.addEventListener('click', function() {
     var customLength = document.getElementsByClassName('customDate flatpickr-input').length
     for (let i = 0; i < customLength; i++) {
         var addConfigArray = [];
-        addConfigArray.push(document.getElementsByClassName('customDate flatpickr-input')[i].value);
+        addConfigArray.push(.value);
+        if (document.getElementsByClassName('customDate flatpickr-input')[i].length == 10) {
+            addConfigArray.push(document.getElementsByClassName('customDate flatpickr-input')[i].value + " to "
+            + document.getElementsByClassName('customDate flatpickr-input')[i].value);
+        } else {
+            addConfigArray.push(document.getElementsByClassName('customDate flatpickr-input')[i].value);
+        }
         addConfigArray.push(document.getElementsByClassName('customStartTime flatpickr-input')[i].value);
         addConfigArray.push(document.getElementsByClassName('customEndTime flatpickr-input')[i].value);
         addConfigArray.push(document.getElementsByClassName('customSlotDuration')[i].selectedOptions[0].label);
