@@ -19,7 +19,7 @@ let pickerDateRange = flatpickr("#dateRange", {
         validate()
         console.log('working')
     },
-    onClose: function() {
+    onChange: function() {
         validate()
         console.log('working')
     }
@@ -33,7 +33,7 @@ let pickerStart = flatpickr("#startTime", {
         validate()
         console.log('working')
     },
-    onClose: function() {
+    onChange: function() {
         validate()
         console.log('working')
     }
@@ -48,7 +48,7 @@ let pickerEnd = flatpickr("#endTime", {
         validate()
         console.log('working')
     },
-    onClose: function() {
+    onChange: function() {
         validate()
         console.log('working')
     }
@@ -107,7 +107,7 @@ selectName.addEventListener('change', function() {
 
 var addConfigHTML = `
 <div class="field">
-    <label class="label">Custom Date</label>
+    <label class="label">Custom Date Range</label>
     <div class="control">
         <input id="customDate" class="input customDate" type="text">
     </div>
@@ -146,21 +146,37 @@ addConfig.addEventListener('click', function() {
     var customDateIndex = "customDate" + String(customLength)
     var customStartTimeIndex = "customStartTime" + String(customLength)
     var customEndTimeIndex = "customEndTime" + String(customLength)
+    if (pickerDateRange.selectedDates.length != 0) {
+        var selectStartDate = pickerDateRange.selectedDates[0]
+        var selectStartDate = selectStartDate.getFullYear() + '-'
+        + String(parseInt(selectStartDate.getMonth()) + 1) + '-'
+        + selectStartDate.getDate()
+        var selectEndDate = pickerDateRange.selectedDates[pickerDateRange.selectedDates.length - 1]
+        var selectEndDate = selectEndDate.getFullYear() + '-'
+        + String(parseInt(selectEndDate.getMonth()) + 1) + '-'
+        + selectEndDate.getDate()
+    }
 
     document.getElementById("customDate").setAttribute("id", customDateIndex);
     document.getElementById("customStartTime").setAttribute("id", customStartTimeIndex);
     document.getElementById("customEndTime").setAttribute("id", customEndTimeIndex);
 
     flatpickr("#"+customDateIndex, {
+        mode: "range",
+        minDate: "today",
         weekNumbers: true,
         altInput: true,
         altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
         dateFormat: "Y-m-d",
+        disable: [{
+            from: selectStartDate,
+            to: selectEndDate
+        }],
         onReady: function() {
             validate()
             console.log('working')
         },
-        onClose: function() {
+        onChange: function() {
             validate()
             console.log('working')
         }
@@ -174,7 +190,7 @@ addConfig.addEventListener('click', function() {
             validate()
             console.log('working')
         },
-        onClose: function() {
+        onChange: function() {
             validate()
             console.log('working')
         }
@@ -189,7 +205,7 @@ addConfig.addEventListener('click', function() {
             validate()
             console.log('working')
         },
-        onClose: function() {
+        onChange: function() {
             validate()
             console.log('working')
         }
