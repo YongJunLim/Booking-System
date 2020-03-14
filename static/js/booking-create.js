@@ -285,8 +285,7 @@ createBooking.addEventListener('click', function() {
     var customLength = document.getElementsByClassName('customDate flatpickr-input').length
     for (let i = 0; i < customLength; i++) {
         var addConfigArray = [];
-        addConfigArray.push(.value);
-        if (document.getElementsByClassName('customDate flatpickr-input')[i].length == 10) {
+        if (document.getElementsByClassName('customDate flatpickr-input')[i].value.length == 10) {
             addConfigArray.push(document.getElementsByClassName('customDate flatpickr-input')[i].value + " to "
             + document.getElementsByClassName('customDate flatpickr-input')[i].value);
         } else {
