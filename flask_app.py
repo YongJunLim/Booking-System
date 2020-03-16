@@ -114,9 +114,13 @@ def bookingCreate():
 
         return redirect(url_for('bookingCreate'))
 
-@app.route('/testTable')
+@app.route('/testTable', methods=['POST', 'GET'])
 def testTable():
-    return render_template('testTable.html')
+    if request.method == "POST":
+        refCode = request.form.get('testTable')
+    else:
+        refCode = ""
+    return render_template('testTable.html', refCode = refCode)
 
 if __name__=="__main__":
     app.run()

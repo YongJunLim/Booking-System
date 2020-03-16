@@ -25,7 +25,7 @@ function bookSlot(tableCell) {
             return;
         }
     }
-    if (tableCell.classList.contains('is-blocked')){
+    if (tableCell.classList.contains('is-blocked')) {
         tableCell.classList.add('is-blocked-selected');
         setTimeout(function () {
             tableCell.offsetHeight;

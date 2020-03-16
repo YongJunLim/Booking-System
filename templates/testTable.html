@@ -14,6 +14,7 @@ href="{{ url_for('static', filename='css/testTable.css') }}">
 {% block content %}
 <section class="section is-centered">
     <div class="container">
+        {{ refCode }}
         <div class="field is-grouped is-grouped-centered">
             <div class="tags">
                 <span class="tag">Available</span>
@@ -23,6 +24,18 @@ href="{{ url_for('static', filename='css/testTable.css') }}">
                 <span class="tag is-danger">Cancel</span>
             </div>
         </div>
+        <form action="/testTable" method="POST">
+            <div class="field has-addons">
+                <div class="control">
+                    <input class="input" type="text" name="testTable" placeholder="Find a repository">
+                </div>
+                <div class="control">
+                    <button type="submit" class="button is-info">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </form>
         <div class="field is-grouped is-grouped-centered">
             <h1 id="teacher" class="has-text-weight-bold has-text-centered is-size-3">{{ cherName }}</h1>
 
