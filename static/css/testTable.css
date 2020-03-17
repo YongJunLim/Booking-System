@@ -3,8 +3,8 @@ div.tags {
 }
 
 .field.has-addons {
-  justify-content: center;
-  margin-bottom: 12px;
+    justify-content: center;
+    margin-bottom: 12px;
 }
 
 td:not(.has-text-weight-bold) {
