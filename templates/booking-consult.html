@@ -15,8 +15,6 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
 {% block content %}
 <section class="section is-centered">
     <div class="container">
-        {{ test_arr }}
-        
         <div class="field is-grouped is-grouped-centered">
             <div class="tags">
                 <span class="tag">Available</span>
@@ -26,50 +24,56 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
                 <span class="tag is-danger">Cancel</span>
             </div>
         </div>
-        <div class="field is-grouped is-grouped-centered">
-            <form action="/booking-consult" method="POST">
-                <input type="text" class="searchbar" name="cherName" placeholder="Enter your teacher&#39;s name here!">
-                <input type="submit" class="button" required="">
-            </form>
-        </div>
-
-        {% if cherName %}
-        <form action="/booking-consult" method = "POST">
-
-            <div class="field">
+        <form action="/booking-consult" method="POST">
+            <div class="field has-addons">
                 <div class="control">
-                    <input class="input" id="dateConsult" type="text" required>
+                    <input type="text" class="searchbar input" name="refCode" placeholder="Enter your reference code here!" required>
+                </div>
+                <div class="control">
+                    <input type="submit" class="button is-info" required="">
                 </div>
             </div>
-
-            <div class="field">
-                <h1 id="teacher" class="has-text-weight-bold has-text-centered is-size-3">{{ cherName }}</h1>
-                <table id="consultation-booking" class="table is-bordered is-fullwidth">
-                    <tbody id="consultation-tbody">
-                        
-                    </tbody>
-                </table>
-            </div>
-            <div class="field is-grouped is-grouped-centered">
-                <input name="cancelledBookings" type="hidden">
-                <button type="submit" name="newBookings" class="button is-link">
-                    Update Booking
-                </button>
-            </div>
         </form>
+        {% if refCode %}
+            {% if error==1 %}
+                <h1 class="has-text-weight-bold has-text-centered is-size-5">Sorry, an event with the reference code {{refCode}} could not be found :(</h1>
+            {% else %}
+            <form action="/booking-consult" method = "POST">
+                <div class="field">
+                    <h2 id="dates-to-display"></h2>
+                    <div class="control">
+                        <input class="input" id="dateConsult" type="text" placeholder="Select a date" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <h1 id="eventName" class="has-text-weight-bold has-text-centered is-size-3"></h1>
+                    <table id="consultation-booking" class="table is-bordered is-fullwidth">
+                        <tbody id="consultation-tbody">
 
+                        </tbody>
+                    </table>
+                </div>
+                <div class="field is-grouped is-grouped-centered">
+                    <input name="cancelledBookings" type="hidden">
+                    <input name="refCode" type="hidden" value="{{refCode}}">
+                    <button type="submit" name="newBookings" class="button is-link" disabled=true>
+                        Update Booking
+                    </button>
+                </div>
+            </form>
+            {% endif %}
         {% endif %}
-
-
     </div>
 </section>
 {% endblock %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.3/flatpickr.min.js"></script>
-{% if cherName %}
+{% if refCode %}
 <script src="{{ url_for('static', filename='js/booking-consult.js') }}"></script>
 <script>
     // Global variables to be passed into dashboard.js
-    configs = processTimings("{{timeRanges}}");
+    configs = processTimings("{{timeRanges}}"); // returns [dateConfigs, timingConfigs, allowedDates]
+    var event = document.getElementById("eventName");
+    if(event) event.innerHTML = configs[1][0][3];
     bookedSlots = formatSlots("{{bookedSlots}}");
     blocked = formatSlots("{{blocked}}");
 </script>

@@ -1,0 +1,150 @@
+{% extends "layout.html" %}
+{% block body %}
+{% block nav %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<section class="section is-centered">
+    <div class="container">
+        <form action="/view-bookings" method="POST">
+        {% if view_type=="time" %}
+            <input type="hidden" name="view_type" value="event">
+            <input class="button is-info" type="submit" value="Display by Event">
+        {% elif view_type=="event" %}
+            <input type="hidden" name="view_type" value="time">
+            <input class="button is-info" type="submit" value="Display by Time">
+        {% endif %}
+        </form>
+        <h1 class="title">Upcoming Events</h1>
+        <table class="table is-fullwidth is-hoverable">
+        {% if view_type=="time" %}
+            {% if events_2d == [] %}
+                <h3 class="has-text-weight-bold has-text-centered is-size-3">You have no upcoming events</h3>
+            {% else %}
+            <thead>
+                <tr>
+                <th>Meeting With</th>
+                <th>Time Booked</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(events_2d | length) %}
+                <tr data-target="modal_time_{{i+1}}">
+                    <td>{{events_2d[i]["person_name"]}}</td>
+                    <td>
+                        {{events_2d[i]["date"]}}
+                        <br />
+                        {{events_2d[i]["start_time"]}} - {{events_2d[i]["end_time"]}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        {% elif view_type=="event" %}
+            {% if events_3d == [] %}
+                <h3 class="has-text-weight-bold has-text-centered is-size-3">You have no upcoming events</h3>
+            {% else %}
+            <thead>
+            </thead>
+            <tbody>
+                {% for i in range(events_3d | length) %}
+                <tr>
+                    <td class="has-text-weight-bold">Meeting With: </td>
+                    <td>{{events_3d[i][0]["person_name"]}}</td>
+                </tr>
+                {% for j in range(events_3d[i] | length) %}
+                <tr data-target="modal_event_{{i+1}}_{{j+1}}">
+                    {% if j==0 %}
+                    <td class="has-text-weight-bold">Timings: </td>
+                    {% else %}
+                    <td></td>
+                    {% endif %}
+                    <td>
+                        {{events_3d[i][j]["date"]}}
+                        <br />
+                        {{events_3d[i][j]["start_time"]}} - {{events_3d[i][j]["end_time"]}}
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        {% endif %}
+        </table>
+
+    </div>
+    {% if view_type=="time" %}
+        {% for i in range(events_2d | length) %}
+        <div id="modal_time_{{i+1}}" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <table class="table is-fullwidth is-hoverable">
+                        <tbody>
+                            <tr>
+                                <td class="has-text-weight-bold">Meeting With</td>
+                                <td>
+                                    {{events_2d[i]["person_name"]}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Time Booked</td>
+                                <td>
+                                    {{events_2d[i]["date"]}}<br>
+                                    {{events_2d[i]["start_time"]}} - {{events_2d[i]["end_time"]}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Reference Code</td>
+                                <td>
+                                   {{events_2d[i]["ref_code"]}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button class="modal-close is-large"></button>
+        </div>
+        {% endfor %}
+    {% elif view_type=="event" %}
+        {% for i in range(events_3d | length) %}
+        {% for j in range(events_3d[i] | length) %}
+        <div id="modal_event_{{i+1}}_{{j+1}}" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <table class="table is-fullwidth is-hoverable">
+                        <tbody>
+                            <tr>
+                                <td class="has-text-weight-bold">Meeting With</td>
+                                <td>
+                                    {{events_3d[i][j]["person_name"]}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Time Booked</td>
+                                <td>
+                                    {{events_3d[i][j]["date"]}}<br>
+                                    {{events_3d[i][j]["start_time"]}} - {{events_3d[i][j]["end_time"]}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Reference Code</td>
+                                <td>
+                                    {{events_3d[i][j]["ref_code"]}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button class="modal-close is-large"></button>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    {% endif %}
+</section>
+{% endblock %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
