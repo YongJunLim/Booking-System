@@ -1,3 +1,5 @@
+# This file is for testing purposes
+
 from flask import Flask, render_template, redirect, url_for, request
 import json
 
@@ -124,5 +126,3 @@ def testTable():
 
 if __name__=="__main__":
     app.run()
-
-
