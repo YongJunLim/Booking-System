@@ -22,11 +22,11 @@ var observer = new MutationObserver(function (mutations) {
                     var tbody = document.getElementById("consultation-tbody");
                     if (tbody) tbody.remove();
                     var submit = document.getElementsByClassName("button is-link")[0];
-                    if (submit) submit.style="display: none;";
+                    if (submit) submit.disabled = true;
                 }
                 else{
                     var submit = document.getElementsByClassName("button is-link")[0];
-                    if (submit) submit.style = "";
+                    if (submit) submit.disabled = false;
                     generateTimings(timeRange);
                     // reset all slots
                     for (var i = 0, row; row = table.rows[i]; i++) table.rows[i].cells[1].className = '';
@@ -59,7 +59,7 @@ var observer = new MutationObserver(function (mutations) {
                     // End of else block
                 }
             }
-            
+
         }
     });
 });
@@ -102,8 +102,12 @@ function bookSlot(tableCell) {
             return;
         }
     }
-    if (tableCell.classList.contains('is-blocked')){
-        alert("Slot already booked.");
+    if (tableCell.classList.contains('is-blocked')) {
+        tableCell.classList.add('is-blocked-selected');
+        setTimeout(function () {
+            tableCell.offsetHeight;
+            tableCell.classList.remove('is-blocked-selected')
+        },300)
     }
     else {
         tableCell.classList.toggle('is-selected');
@@ -114,14 +118,9 @@ function bookSlot(tableCell) {
 
 flatpickr("#dateConsult", {
     mode: "single",
+    enable: configs[2],
     weekNumbers: true,
     altInput: true,
     altFormat: "F j, Y", // https://flatpickr.js.org/formatting/
     dateFormat: "Y-m-d"
 });
-
-/*
-function bookConflict(tableCell) {
-    alert("Cannot book multiple slots at once.");
-}
-*/

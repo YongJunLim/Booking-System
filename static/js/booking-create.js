@@ -137,6 +137,11 @@ var addConfigHTML = `
         </select>
     </div>
 </div>
+<div class="field">
+    <button id="customDeleteConfig" class="button is-danger">
+        Delete Above Configuration
+    </button>
+</div>
 `;
 
 addConfig.addEventListener('click', function() {
@@ -146,6 +151,7 @@ addConfig.addEventListener('click', function() {
     var customDateIndex = "customDate" + String(customLength)
     var customStartTimeIndex = "customStartTime" + String(customLength)
     var customEndTimeIndex = "customEndTime" + String(customLength)
+    var customDeleteConfigIndex = "customDeleteConfig" + String(customLength)
     if (pickerDateRange.selectedDates.length != 0) {
         var selectStartDate = pickerDateRange.selectedDates[0]
         var selectStartDate = selectStartDate.getFullYear() + '-'
@@ -160,6 +166,7 @@ addConfig.addEventListener('click', function() {
     document.getElementById("customDate").setAttribute("id", customDateIndex);
     document.getElementById("customStartTime").setAttribute("id", customStartTimeIndex);
     document.getElementById("customEndTime").setAttribute("id", customEndTimeIndex);
+    document.getElementById("customDeleteConfig").setAttribute("id", customDeleteConfigIndex);
 
     flatpickr("#"+customDateIndex, {
         mode: "range",
@@ -224,6 +231,16 @@ addConfig.addEventListener('click', function() {
         setCustomEnd(newSelectCustomStart.id)
         validate()
     });
+
+    var deleteNewConfig = document.getElementById(customDeleteConfigIndex)
+    deleteNewConfig.addEventListener('click', function() {
+        var customIndex = deleteNewConfig.id.slice(-1)
+        document.getElementById("customDate"+customIndex).parentElement.parentElement.remove();
+        document.getElementById("customStartTime"+customIndex).parentElement.parentElement.remove();
+        document.getElementById("customEndTime"+customIndex).parentElement.parentElement.remove();
+        document.getElementById("customDuration"+customIndex).parentElement.parentElement.remove();
+        deleteNewConfig.remove();
+    })
 });
 
 function setCustomEnd(id) {
