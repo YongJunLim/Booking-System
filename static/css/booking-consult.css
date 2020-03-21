@@ -2,8 +2,23 @@ div.tags {
     justify-content: center;
 }
 
-td.has-text-weight-bold {
-    max-width: 3vmin;
+.field.has-addons {
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+td:not(.has-text-weight-bold) {
+    background-color: #FAFAFA;
+    min-width: 50vmin;
+}
+
+td:not(.has-text-weight-bold) {
+    transition: 0.15s;
+}
+
+td:not(.has-text-weight-bold):active {
+    transform: scaleX(1.2);
+    box-shadow: 0 2px 34px 0 rgba(0,0,0,.27);
 }
 
 div.hidden {
@@ -12,17 +27,76 @@ div.hidden {
 }
 
 .table td.is-booked {
-    background-color: #23D160;
+    background: linear-gradient(to bottom, #31DD6D, #1FBB56);
 }
 
 .table td.is-blocked {
-    background-color: #363636;
+    background: linear-gradient(to bottom, #505050, #292929);
+}
+
+@-webkit-keyframes vibrate-1 {
+    0% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+    20% {
+        -webkit-transform: translate(-2px, 2px);
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        -webkit-transform: translate(-2px, -2px);
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        -webkit-transform: translate(2px, 2px);
+        transform: translate(2px, 2px);
+    }
+    80% {
+        -webkit-transform: translate(2px, -2px);
+        transform: translate(2px, -2px);
+    }
+    100% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+  }
+@keyframes vibrate-1 {
+    0% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+    20% {
+        -webkit-transform: translate(-2px, 2px);
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        -webkit-transform: translate(-2px, -2px);
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        -webkit-transform: translate(2px, 2px);
+        transform: translate(2px, 2px);
+    }
+    80% {
+        -webkit-transform: translate(2px, -2px);
+        transform: translate(2px, -2px);
+    }
+    100% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+  }
+
+.table td.is-blocked-selected {
+    background: linear-gradient(to bottom, #505050, #292929);
+    -webkit-animation: vibrate-1 0.3s linear infinite both;
+    animation: vibrate-1 0.3s linear infinite both;
 }
 
 .table td.is-selected {
-    background-color: #00D1B2;
+    background: linear-gradient(to bottom, #00EBC8, #00D1B2);
 }
 
 .table td.is-cancelled {
-    background-color: #FF3860;
+    background: linear-gradient(to bottom, #FF5274, #FF0537);
 }

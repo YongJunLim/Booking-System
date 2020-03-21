@@ -9,16 +9,16 @@ body, input, button {
 }
 
 .hero.is-info .navbar-item, .hero.is-info .navbar-link {
-    color: #fff;
+    color: #FFF;
 }
 
 .hero-head .navbar-link:not(.is-arrowless)::after {
-    border-color: #fff;
+    border-color: #FFF;
 }
 
 @media (min-width: 1024px) {
     .navbar-dropdown {
-        border-top: 2px solid hsl(217, 71%, 53%);
+        border-top: 2px solid #3273DC
         /* adapted from has-background-info color */
     }
     .navbar-item img {
@@ -34,6 +34,7 @@ body, input, button {
     }
     .navbar-item img {
         max-height: 64px;
+        max-width: 64px;
     }
 }
 
