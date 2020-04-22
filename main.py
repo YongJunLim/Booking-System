@@ -8,6 +8,7 @@ import json
 
 from check_existence import Check_Existence
 from create_event import create_event
+from my_events import view_my_events
 from view_booking import View_Booking_By_Time, View_Booking_By_Event
 from new_user import New_User
 from data_to_booking import data_to_booking
@@ -40,26 +41,36 @@ def view_bookings():
         email = user_info['email']
         picture = user_info['picture']
         name = user_info['name']
-
+        array_2d = View_Booking_By_Time(email)
+        array_3d = View_Booking_By_Event(email)
         if request.method=="GET":
-            array_2d = View_Booking_By_Time(email)
             return render_template('view-bookings.html', email=email, picture=picture,
-        name=name, events_2d = array_2d, view_type="time")
+        name=name, events_2d = array_2d, events_3d = array_3d, view_type="event")
 
         else:
             view_type=request.form.get("view_type")
-            if view_type=="event":
-                array_3d = View_Booking_By_Event(email)
-                return render_template('view-bookings.html', email=email, picture=picture,
-        name=name, events_3d = array_3d, view_type=view_type)
-
-            else:
-                array_2d = View_Booking_By_Time(email)
-                return render_template('view-bookings.html', email=email, picture=picture,
-        name=name, events_2d = array_2d, view_type="time")
+            return render_template('view-bookings.html', email=email, picture=picture,
+        name=name, events_2d = array_2d, events_3d = array_3d, view_type=view_type)
+            
         # Format [ [Start_Time, End_Time, Meet_Who, Ref_Code, Date] ]
     else:
         return redirect(url_for("google_auth.login"))
+
+
+@app.route('/my-events', methods=["GET", "POST"])
+def my_events():
+    if google_auth.is_logged_in():
+        user_info = google_auth.get_user_info()
+        email = user_info['email']
+        picture = user_info['picture']
+        name = user_info['name']
+        events = view_my_events(email)
+        return render_template('my-events.html', email=email, picture=picture, name=name, events = events)
+            
+        # Format [ [Start_Time, End_Time, Meet_Who, Ref_Code, Date] ]
+    else:
+        return redirect(url_for("google_auth.login"))
+
 
 @app.route('/booking-consult', methods=["GET", "POST"])
 def bookingConsult():
@@ -89,13 +100,13 @@ def bookingConsult():
             elif new_bookings is not None:  # User has applied for an event/booking
 
                 cancelled_bookings = request.form.get("cancelledBookings")
-                create_slot_record(email, name, new_bookings, refCode)
                 cancel(email, cancelled_bookings, refCode)
+                collison = create_slot_record(email, name, new_bookings, refCode)
 
                 time_ranges, bookedSlots, blocked = data_to_booking(refCode, email)
                 return render_template("booking-consult.html", email=email,
                 picture=picture, name=name, refCode=refCode, bookedSlots=bookedSlots,
-                blocked=blocked, timeRanges=time_ranges)
+                blocked=blocked, timeRanges=time_ranges, collison = collison)
     else:
         return redirect(url_for("google_auth.login"))
 
@@ -115,7 +126,7 @@ def bookingCreate():
                 error = 'Error with booking. Please try again.'
                 return render_template('booking-create.html', email=email, picture=picture,
                 name=name, error=error)
-
+            
             array_2d = json.loads(request.form['create-booking'])
 
             ref_code = create_event(array_2d, email, name)

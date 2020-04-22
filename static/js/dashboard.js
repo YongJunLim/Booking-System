@@ -59,7 +59,7 @@ var observer = new MutationObserver(function (mutations) {
                     // End of else block
                 }
             }
-
+            
         }
     });
 });

@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% block nav %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+
+
+<section class="section is-centered">
+
+	<div class="container">
+		
+		<h1 class="title">My Upcoming Events</h1>
+		
+		{% if events == [] %}
+			<h3 class="has-text-weight-bold has-text-centered is-size-3">You have no upcoming events</h3>
+		{% else %}
+		<table class="table is-fullwidth is-hoverable">
+			<thead>
+				<tr>
+                    <th>Event Name</th>
+                    <th>Date(s)</th>
+                    <th>Reference Code</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i in range(events | length) %}
+				<tr data-target="modal_{{i+1}}">
+					<td>{{events[i]["Event_Name"]}}</td>
+					<td>
+                        {% if events[i]["Start_Date"] == events[i]["End_Date"] %}
+                            {{events[i]["Start_Date"]}}
+                        {% else %}
+                            {{events[i]["Start_Date"]}} - {{events[i]["End_Date"]}}
+                        {% endif %}
+						<br />
+						{{events[i]["Start_Time"]}} - {{events[i]["End_Time"]}}
+					</td>
+                    <td>
+                        {{events[i]["ref_code"]}}
+                    </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+        {% endif %}
+	</div>
+	
+	
+	{% for i in range(events | length) %}
+		<div id="modal_{{i+1}}" class="modal">
+			<div class="modal-background"></div>
+			<div class="modal-content">
+				<div class="box">
+					<table class="table is-fullwidth is-hoverable">
+						<tbody>
+							<tr>
+								<td class="has-text-weight-bold">Event Name</td>
+								<td>
+									{{events[i]["Event_Name"]}}
+								</td>
+							</tr>
+							<tr>
+								<td class="has-text-weight-bold">Date(s)</td>
+								<td>
+									{% if events[i]["Start_Date"] == events[i]["End_Date"] %}
+                                        {{events[i]["Start_Date"]}}
+                                    {% else %}
+                                        {{events[i]["Start_Date"]}} - {{events[i]["End_Date"]}}
+                                    {% endif %}
+								</td>
+							</tr>
+                            <tr>
+								<td class="has-text-weight-bold">Timings</td>
+								<td>
+                                    {{events[i]["Start_Time"]}} - {{events[i]["End_Time"]}}
+								</td>
+							</tr>
+                            <tr>
+								<td class="has-text-weight-bold">Slot Duration</td>
+								<td>
+                                    {{events[i]["Slot_Duration"]}}
+								</td>
+							</tr>
+							<tr>
+								<td class="has-text-weight-bold">Reference Code</td>
+								<td>
+								   {{events[i]["ref_code"]}}
+								</td>
+							</tr>
+                            <tr>
+								<td class="has-text-weight-bold">Created by</td>
+								<td>
+								   {{events[i]["Creator_Name"]}}
+                                   <br />
+                                   {{events[i]["Creator_Email"]}}
+								</td>
+							</tr>
+                            
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<button class="modal-close is-large"></button>
+		</div>
+	{% endfor %}
+
+</section>
+{% endblock %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

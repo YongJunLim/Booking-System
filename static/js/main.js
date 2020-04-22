@@ -32,7 +32,3 @@ if (bgCloses.length > 0) {
         });
     });
 }
-
-function toggleDisplay(){
-    document.getElementById("btn")
-}

@@ -2,85 +2,88 @@
 <html>
     <head>
         {% block head %}
-        <title>BuildingBloCS Booking System</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href=
-        "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-        <link rel="stylesheet" href=
-        "https://indestructibletype.com/fonts/Jost.css">
-        <link rel="stylesheet" type="text/css" href=
-        "{{ url_for('static', filename='css/layout.css') }}">
-        <link rel="icon" type="image/png" href=
-        "{{ url_for('static', filename='img/favicon.png') }}">
-        {% endblock %}
+		<title>BuildingBloCS Booking System</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href=
+		"https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+		<link rel="stylesheet" href=
+		"https://indestructibletype.com/fonts/Jost.css">
+		<link rel="stylesheet" type="text/css" href=
+		"{{ url_for('static', filename='css/layout.css') }}">
+		<link rel="icon" type="image/png" href=
+		"{{ url_for('static', filename='img/favicon.png') }}">
+		{% endblock %}
     </head>
     <body>
         {% block body %}
-        {% block nav %}
-        <nav class="navbar is-info">
-            <div class="navbar-brand">
-                <span id="nav-title" class="navbar-item">
-                    <img id="nav-icon" src="
-                    {{ url_for('static', filename='img/BBCS_logo.png') }}"
-                    height="24" width="24">
-                    BuildingBloCS Booking System
-                </span>
-                <span class="navbar-burger burger" data-target="navMenu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
-            </div>
-            <div id="navMenu" class="navbar-menu">
-                <div class="navbar-start">
-                    <a href="/" class="navbar-item">
-                        Home
-                    </a>
-                    {% if email %}
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            Bookings
-                        </a>
-                        <div class="navbar-dropdown">
-                            <a href="/booking-consult" class="navbar-item">
-                                Book
-                            </a>
-                            <a href="/create" class="navbar-item">
-                                Create
-                            </a>
-                        </div>
-                    </div>
-                    {% endif %}
-                </div>
-                <div class="navbar-end">
-                    {% if not email %}
-                    <a href="/google/login" class="navbar-item">
-                        Sign in
-                    </a>
-                    {% else %}
-                    <a href="/google/logout" class="navbar-item">
-                        Sign out
-                    </a>
-                    <div class="navbar-item level">
-                        <div class="level-left has-text-centered">
-                            <div class="has-text-weight-bold level-item">
-                                {{ name }}
-                            </div>
-                            <div class="level-item">
-                                <figure class="image">
-                                    <img id="user-icon" class="is-rounded" src={{ picture }}>
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </nav>
+		{% block nav %}
+		<nav class="navbar is-info">
+			<div class="navbar-brand">
+				<span id="nav-title" class="navbar-item">
+					<img id="nav-icon" src="
+					{{ url_for('static', filename='img/BBCS_logo.png') }}"
+					height="24" width="24">
+					BuildingBloCS Booking System
+				</span>
+				<span class="navbar-burger burger" data-target="navMenu">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+			</div>
+			<div id="navMenu" class="navbar-menu">
+				<div class="navbar-start">
+					<a href="/" class="navbar-item">
+						Home
+					</a>
+					{% if email %}
+					<div class="navbar-item has-dropdown is-hoverable">
+						<a class="navbar-link">
+							Bookings
+						</a>
+						<div class="navbar-dropdown">
+							<a href="/booking-consult" class="navbar-item">
+								Book
+							</a>
+							<a href="/create" class="navbar-item">
+								Create
+							</a>
+                            <a href="/my-events" class="navbar-item">
+								Manage
+							</a>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+				<div class="navbar-end">
+					{% if not email %}
+					<a href="/google/login" class="navbar-item">
+						Sign in
+					</a>
+					{% else %}
+					<a href="/google/logout" class="navbar-item">
+						Sign out
+					</a>
+					<div class="navbar-item level">
+						<div class="level-left has-text-centered">
+							<div class="has-text-weight-bold level-item">
+								{{ name }}
+							</div>
+							<div class="level-item">
+								<figure class="image">
+									<img id="user-icon" class="is-rounded" src={{ picture }}>
+								</figure>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+		{% endblock %}
+		{% block content %}{% endblock %}
         {% endblock %}
-        {% block content %}{% endblock %}
-        {% endblock %}
-        <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+    	<script src="{{ url_for('static', filename='js/layout.js') }}"></script>
     </body>
 </html>

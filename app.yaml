@@ -1,0 +1,20 @@
+runtime: python37
+
+handlers:
+  # This configures Google App Engine to serve the files in the app's static
+  # directory.
+
+  # This handler routes all requests not caught above to your main app. It is
+  # required when static routes are defined, but can be omitted (along with
+  # the entire handlers section) when there are no static files defined.
+- url: /.*
+  script: auto
+
+env_variables:
+    # These variables will be available in the os.environ dictionary
+    FN_AUTH_REDIRECT_URI: https://dhs-booking.com/google/auth
+    FN_BASE_URI: https://dhs-booking.com
+    FN_CLIENT_ID: 1033998209326-9gis7hkl82ukrdp203qrrrv1jpc91o2j.apps.googleusercontent.com
+    FN_CLIENT_SECRET: 0tsni7AhRHhzNexvJd6Q3GO7
+    SECRET_KEY: MikuBeAMegaBigLit
+    CLOUD_STORAGE_BUCKET: individual_users

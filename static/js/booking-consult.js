@@ -56,13 +56,6 @@ function findDate(dateConfigs, timingConfigs, date){
     return -1
 }
 
-function processAMPM(time){
-    var arr = time.split(':')
-    var hour = (parseInt(arr[0]) % 12 + 12 * (arr[1].slice(-2) == "PM")).toString();
-    var minutes = arr[1].slice(0, 2);
-    return hour+':'+minutes;
-}
-
 function generateTimings(timeRange) {
     var table = document.getElementById('consultation-booking');
     var tbody = document.getElementById("consultation-tbody");
@@ -74,8 +67,8 @@ function generateTimings(timeRange) {
     var event = document.getElementById("eventName");
     if(event) event.innerHTML = timeRange[3];
 
-    var start = processAMPM(timeRange[0]);
-    var end = processAMPM(timeRange[1]);
+    var start = timeRange[0];
+    var end = timeRange[1];
 
     var startTime = new Date('2020-03-02 ' + start);
     var endTime = new Date('2020-03-02 ' + end);
@@ -120,6 +113,16 @@ function generateTimings(timeRange) {
     }
 }
 
+function processCollison(collison){
+    if (collison == "" || collison == "False") return false;
+    items = collison.split("&#39;")
+    var data = [];
+    for (var i = 1; i < items.length; i += 2) data.push(items[i]);
+    if (data[0]=="you") alert("Unable to book slot on " + data[1] + " from " + data[2] + " to " + data[3] + ". You already have booked another slot elsewhere.");
+    else alert("Unable to book slot on " + data[1] + " from " + data[2] + " to " + data[3] + ". The creator has booked another slot elsewhere.");
+    return true;
+}
+
 function formatSlots(strBookedSlots){
     items = strBookedSlots.split("&#39;")
     var data = [];
@@ -128,8 +131,15 @@ function formatSlots(strBookedSlots){
     for (var i = 0; i < data.length; i += 2){
         if (!(data[i] in kvp)) kvp[data[i]] = []; // if does not exist, create empty array for each date
         // --- "08:00 AM" --> "8:00am"
-        //data[i + 1] = parseInt(data[i + 1].slice(0, 2)).toString() + data[i + 1].slice(2).toLowerCase().split(' ').join('')
+        var arr = data[i+1].split(':');
+        var h = parseInt(arr[0]);
+        var m = arr[1];
+        var tag = h>=12 ? "pm" : "am";
+        if (h%12==0) h=12;
+        else h %= 12;
 
+        data[i + 1] = h.toString()+':'+m+tag;
+        
         kvp[data[i]].push(data[i + 1]); // append to array
     }
     return kvp;

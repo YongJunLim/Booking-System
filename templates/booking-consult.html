@@ -49,7 +49,7 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
                     <h1 id="eventName" class="has-text-weight-bold has-text-centered is-size-3"></h1>
                     <table id="consultation-booking" class="table is-bordered is-fullwidth">
                         <tbody id="consultation-tbody">
-
+                            
                         </tbody>
                     </table>
                 </div>
@@ -74,6 +74,7 @@ href="{{ url_for('static', filename='css/booking-consult.css') }}">
     configs = processTimings("{{timeRanges}}"); // returns [dateConfigs, timingConfigs, allowedDates]
     var event = document.getElementById("eventName");
     if(event) event.innerHTML = configs[1][0][3];
+    collisons = processCollison("{{collison}}");
     bookedSlots = formatSlots("{{bookedSlots}}");
     blocked = formatSlots("{{blocked}}");
 </script>

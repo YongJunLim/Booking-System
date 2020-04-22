@@ -31,7 +31,7 @@ def build_credentials():
         raise Exception('User must be logged in')
 
     oauth2_tokens = flask.session[AUTH_TOKEN_KEY]
-
+    
     return google.oauth2.credentials.Credentials(
                 oauth2_tokens['access_token'],
                 refresh_token=oauth2_tokens['refresh_token'],
